@@ -93,7 +93,7 @@ main {
   flex-wrap: wrap;
   gap: 10px;
   background-color: transparent;
-  padding: 0;
+  padding: 20px;
   box-sizing: border-box;
 }
 
