@@ -1,9 +1,8 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Next To do List App',
-  description: 'To do list application for personal use by Aitisam Yaseen',
-  keywords: 'next, react, javascript, todo, list, app',
+  title: 'PLANNER',
+  description: 'PLANNER - A simple daily task maintainer with no more than Mark as completed feature.',
   author: 'Aitisam Yaseen',
 }
 
