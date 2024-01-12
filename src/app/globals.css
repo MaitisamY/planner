@@ -99,6 +99,7 @@ main {
 
 @media screen and (max-width: 500px) {
   main {
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -223,7 +224,7 @@ footer span {
     font-size: 16px;
   }
   .welcome .create-task {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -307,10 +308,6 @@ footer span {
   resize: none;
 }
 
-.popup .add-task form textarea::placeholder {
-  color: #fff;
-}
-
 .popup button {
   width: 100%;
   padding: 10px 25px;
@@ -335,6 +332,21 @@ footer span {
   cursor: pointer;
 }
 
+@media screen and (max-width: 500px) {
+  .popup .add-task {
+    padding: 3rem;
+  }
+  .popup .add-task h2 {
+    font-size: 20px;
+  }
+  .popup .add-task textarea {
+    font-size: 16px;
+  }
+  .popup .add-task button {
+    font-size: 16px;
+  }
+}
+
 /* Task List */
 .task-list {
   width: 300px;
@@ -355,19 +367,18 @@ footer span {
 
 .task-list h2 {
   font-size: 24px;
-  text-transform: uppercase;
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 800;
+  font-weight: 600;
   font-style: normal;
   font-variation-settings: "wdth" 100;
 }
 
 .task-list p {
-  font-size: 18px;
+  font-size: 16px;
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   font-variation-settings: "wdth" 100;
 }
@@ -377,7 +388,7 @@ footer span {
   font-size: 16px;
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   font-variation-settings: "wdth" 100;
   background-color: #474747;
@@ -406,7 +417,7 @@ footer span {
     font-size: 16px;
   }
   .task-list .mark {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
