@@ -2,7 +2,7 @@ import './globals.css'
 
 export const metadata = {
   title: 'PLANNER',
-  description: 'PLANNER - A simple daily task maintainer with no more than Mark as completed feature.',
+  description: 'PLANNER - A simple daily tasks maintainer with no more than mark as completed and task deletion features.',
   author: 'Aitisam Yaseen',
 }
 

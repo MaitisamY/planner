@@ -27,6 +27,13 @@ export default function Home() {
       setTasks(newTasks);
       localStorage.setItem('tasks', JSON.stringify(newTasks));
     };
+
+    const deleteTask = (index) => {
+      const newTasks = [...tasks];
+      newTasks.splice(index, 1);
+      setTasks(newTasks);
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
+    }
   
     useEffect(() => {
       // Load tasks from local storage on component mount
@@ -45,9 +52,10 @@ export default function Home() {
             <Header />
             <Main
                 tasks={tasks}
+                addNewTask={() => setPopup(!popup)}
                 addTask={addTask}
                 markTask={markTask}
-                addNewTask={() => setPopup(!popup)}
+                deleteTask={deleteTask}
             > 
             </Main>
             <Footer />
