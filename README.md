@@ -1,6 +1,6 @@
 **1. NEXT-JS PROJECT**
 ##  PLANNER 
-A simple daily tasks maintainer with no more than mark as completed and task deletion features.
+A simple daily tasks maintainer app with task creation, edition, mark as completed or pending and deletion features.
 
 - Frontend web app
 - react-icons used for delete button icon.

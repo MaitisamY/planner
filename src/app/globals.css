@@ -156,7 +156,7 @@ footer span {
 
 /* Welcome Box */
 .welcome {
-  width: 300px;
+  width: 400px;
   height: auto;
   color: #303030;
   background-color: rgba(224, 173, 62, 0.952);
@@ -178,6 +178,15 @@ footer span {
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
   font-weight: 800;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.welcome h3 {
+  font-size: 18px;
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
   font-style: normal;
   font-variation-settings: "wdth" 100;
 }
@@ -294,7 +303,7 @@ footer span {
   width: 100%;
   box-sizing: border-box;
   padding: 10px 15px;
-  font-size: 16px;
+  font-size: 20px;
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -357,9 +366,9 @@ footer span {
   background-color: rgba(224, 173, 62, 0.952);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
   padding: 20px;
   box-sizing: border-box;
   font-family: "Archivo Black", sans-serif;
@@ -368,23 +377,39 @@ footer span {
   border: none;
 }
 
-.task-list .delete-task {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 0;
-  font-size: 30px;
-  border-radius: 0 10px 0 10px;
+.task-list form {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.task-list .task-btns {
+  margin-top: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  place-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: space-around;
+}
+
+.task-list .task-common-btn {
+  padding: 10px 10px 4px 10px;
+  font-size: 20px;
+  border-radius: 10px;
   text-decoration: none;
   cursor: pointer;
   transition: 0.3s all ease-in-out;
-  background-color: transparent;
-  color: #555555;
+  background-color: #474747;
+  color: rgba(224, 173, 62, 0.952);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
 }
 
-.task-list .delete-task:hover {
-  color: #303030;
+.task-list .task-common-btn:hover {
+  background-color: #303030;
 }
+
 .task-list h2 {
   font-size: 24px;
   font-family: "Archivo", sans-serif;
@@ -394,8 +419,17 @@ footer span {
   font-variation-settings: "wdth" 100;
 }
 
+.task-list label {
+  font-size: 22px;
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
 .task-list p {
-  font-size: 16px;
+  font-size: 12px;
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -417,6 +451,7 @@ footer span {
   outline: none;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  place-self: center;
 }
 
 .task-list .mark:hover {
@@ -424,6 +459,43 @@ footer span {
   color: rgba(224, 173, 62, 0.952);
   transition: 0.3s all ease-in-out;
   cursor: pointer;
+}
+
+.task-list textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  font-size: 18px;
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  background-color: #474747;
+  color: rgba(224, 173, 62, 0.952);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  resize: none;
+}
+
+.task-list input[type="date"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  font-size: 18px;
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  background-color: #474747;
+  color: rgba(224, 173, 62, 0.952);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 @media screen and (max-width: 500px) {

@@ -8,7 +8,7 @@ export default function Popup({ addTask, closePopup }) {
         e.preventDefault();
         addTask(newTask, new Date().toDateString(), "pending");
         closePopup();
-      };
+    };
 
     return (
         <div className="popup">
@@ -22,7 +22,11 @@ export default function Popup({ addTask, closePopup }) {
                         rows="5" 
                         defaultValue={newTask} 
                         onChange={handleNewTaskChange} 
-                        spellCheck="false" required>
+                        spellCheck="false" 
+                        autoComplete="off"
+                        autoFocus
+                        required
+                    >
                     </textarea>
                     <button type="submit">Add</button>
                 </form>

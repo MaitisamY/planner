@@ -34,6 +34,13 @@ export default function Home() {
       setTasks(newTasks);
       localStorage.setItem('tasks', JSON.stringify(newTasks));
     }
+
+    const editTask = (index, newTask, date, status) => {
+      const newTasks = [...tasks];
+      newTasks[index] = { task: newTask, date, status };
+      setTasks(newTasks);
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
+    }
   
     useEffect(() => {
       // Load tasks from local storage on component mount
@@ -56,6 +63,7 @@ export default function Home() {
                 addTask={addTask}
                 markTask={markTask}
                 deleteTask={deleteTask}
+                editTask={editTask}
             > 
             </Main>
             <Footer />
