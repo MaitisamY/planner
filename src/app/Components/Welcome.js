@@ -1,11 +1,23 @@
 export default function Welcome({ tasks, addNewTask }) {
     return (
         <div className="welcome">
-            <h2>{tasks.length > 0 ? 'Welcome' : 'Welcome to your planner'}</h2>
-            <h3>A simple daily tasks maintainer app with task creation, edition, mark as completed or pending and deletion features.</h3>
-            <p>(Today: {new Date().toDateString()})</p>
-            {tasks.length === 0 && <p>To get started, create a new task</p>}
-            <button onClick={addNewTask} className="create-task">Create Task</button>
+            <h2>
+                Welcome
+                <br />
+                <span>A simple daily tasks maintainer app</span>
+            </h2>
+            <h3>
+                Features
+            </h3>
+            <ul>
+                <li>Task creation with date specification</li>
+                <li>Task and due date editing</li>
+                <li>Task deletion</li>
+                <li>Task marking as completed or pending</li>
+            </ul>
+            <button onClick={addNewTask} className="create-task">
+                {tasks.length === 0 ? 'Create your first task' : 'Create Task'}
+            </button>
         </div>
     )
 }

@@ -1,9 +1,15 @@
 import { useState } from 'react'
-import { BsTrash, BsPencil, BsCheck, BsX, BsCheckAll } from 'react-icons/bs'
+import { formatDateToInput, formatDateToOriginalFormat } from './DateUtil'
+import { BsTrash, BsPencil, BsX, BsCheckAll } from 'react-icons/bs'
 export default function Task({ tasks, markTask, deleteTask, editTask }) {
     const [editingTasks, setEditingTasks] = useState({});
     const [taskChanges, setTaskChanges] = useState({});
     const [status, setStatus] = useState(null);
+    const [dueDate, setDueDate] = useState(null);
+
+    const handleDueDateChange = (event) => {
+        setDueDate(event.target.value);
+    };
     
     const handleTaskChanges = (e, index) => {
         const { value } = e.target;
@@ -23,16 +29,23 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
           ...prevTaskChanges,
           [index]: tasks[index].task,
         }));
-
+      
+        setStatus(tasks[index].status); // Set status
+      
+        const formattedDueDate = formatDateToInput(tasks[index].dueDate);
+      
+        setDueDate(formattedDueDate); // Set due date
+      
         setTimeout(() => {
-            const textarea = document.getElementById(`task-${index}`);
-            if (textarea) {
-              textarea.focus();
-              // Set the selection range to the end of the text
-              textarea.setSelectionRange(textarea.value.length, textarea.value.length);
-            }
+          const textarea = document.getElementById(`task-${index}`);
+          if (textarea) {
+            textarea.focus();
+            // Set the selection range to the end of the text
+            textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+          }
         }, 0);
     };
+      
     
     const stopEditing = (index) => {
         setEditingTasks((prevEditingTasks) => ({
@@ -43,9 +56,11 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
 
     const handleEditFormSubmit = (e, index) => {
         e.preventDefault();
-        editTask(index, taskChanges[index], new Date().toDateString(), status);
+        const formattedDueDate = formatDateToOriginalFormat(dueDate || tasks[index].dueDate);
+        editTask(index, taskChanges[index], formattedDueDate, status);
         stopEditing(index);
-    }
+    };
+      
 
     console.log(status);
 
@@ -61,7 +76,7 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                             id={`task-${index}`}
                             value={taskChanges[index]}
                             type="text"
-                            rows="auto"
+                            rows="5"
                             cols="auto"
                             onChange={(e) => handleTaskChanges(e, index)}
                             spellCheck="false"
@@ -70,7 +85,13 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                             required
                         >
                         </textarea>
-                        <p>Modifying on: {new Date().toDateString()}</p>
+                        <h3>Edit due date</h3>
+                        <input 
+                            type="date" 
+                            value={dueDate}
+                            onChange={handleDueDateChange} 
+                        />
+                        <p className="text-center">Modifying on: {new Date().toDateString()}</p>
                         <div className="task-btns">
                         <button title="Update" className="task-common-btn" type="submit">
                             <BsCheckAll />
@@ -82,7 +103,9 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                     </form>    
                     ) : (
                     <>    
-                        <label className={task.status === 'completed' ? 'line-through' : ''}>
+                        <label 
+                            title={task.status === 'completed' ? 'Click to mark as pending' : 'Click to mark as completed'} 
+                            className={task.status === 'completed' ? 'line-through' : ''}>
                             <input 
                                 title={task.status === 'completed' ? 'Mark as pending' : 'Mark as completed'} 
                                 type="checkbox" 
@@ -90,7 +113,8 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                                 onChange={() => markTask(index)} 
                             /> {task.task}
                         </label>
-                        <p>{task.date}</p>
+                        <p>{ task.updatedDate ? `Last updated on: ${task.updatedDate}` : `Created on: ${task.date}` }</p>
+                        <p>Due on: {task.dueDate}</p>
                         <div className="task-btns"> 
                             <button onClick={() => (setStatus(task.status), startEditing(index))} title="Edit" className="task-common-btn">
                                 <BsPencil />

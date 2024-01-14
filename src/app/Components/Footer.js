@@ -1,6 +1,6 @@
 export default function Footer() {
     const gotoMyPortfolio = () => {
-        window.open("https://maitisamy.github.io/portfolio/", "_blank");
+        window.open("https://github.com/MaitisamY", "_blank");
     }
     return (
         <footer>

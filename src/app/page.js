@@ -10,14 +10,19 @@ export default function Home() {
     const [count, setCount] = useState(0);
     const [tasks, setTasks] = useState([]);
     const [popup, setPopup] = useState(false);
+    const [notification, setNotification] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState('');
 
-    const addTask = (task, date, status) => {
-      const newTask = { task, date, status };
+    const addTask = (task, date, updatedDate, dueDate, status) => {
+      const newTask = { task, date, updatedDate, dueDate, status };
       setTasks((prevTasks) => {
-        const updatedTasks = [...prevTasks, newTask];
+        const updatedTasks = [newTask, ...prevTasks];
         localStorage.setItem('tasks', JSON.stringify(updatedTasks));
         return updatedTasks;
       });
+      // Show success message
+      setNotificationMessage('Task added successfully!');
+      setNotification(true);
     };
   
     const markTask = (index) => {
@@ -26,6 +31,11 @@ export default function Home() {
       newTasks[index].status = currentStatus === 'completed' ? 'pending' : 'completed';
       setTasks(newTasks);
       localStorage.setItem('tasks', JSON.stringify(newTasks));
+
+      // Show success message
+      const statusMessage = newTasks[index].status === 'completed' ? 'completed' : 'pending';
+      setNotificationMessage(`Task marked as ${statusMessage}!`);
+      setNotification(true);
     };
 
     const deleteTask = (index) => {
@@ -33,14 +43,34 @@ export default function Home() {
       newTasks.splice(index, 1);
       setTasks(newTasks);
       localStorage.setItem('tasks', JSON.stringify(newTasks));
+
+      // Show success message
+      setNotificationMessage('Task deleted successfully!');
+      setNotification(true);
     }
 
-    const editTask = (index, newTask, date, status) => {
+    const editTask = (index, newTask, dueDate, status) => {
       const newTasks = [...tasks];
-      newTasks[index] = { task: newTask, date, status };
+      newTasks[index] = {
+        ...newTasks[index],
+        task: newTask,
+        updatedDate: new Date().toDateString(),
+        dueDate: dueDate || newTasks[index].dueDate,
+        status,
+      };
       setTasks(newTasks);
       localStorage.setItem('tasks', JSON.stringify(newTasks));
-    }
+
+      // Show success message
+      setNotificationMessage('Task updated successfully!');
+      setNotification(true);
+    };
+
+    const handleOutsidePopupClick = (event) => {
+      if (event.target.id === 'popup' && popup) {
+        setPopup(false);
+      }
+    };
   
     useEffect(() => {
       // Load tasks from local storage on component mount
@@ -48,13 +78,24 @@ export default function Home() {
       if (storedTasks) {
         setTasks(JSON.parse(storedTasks));
       }
-    }, []);
+    
+      // Hide the notification after 3 seconds when notification state changes
+      const timeout = setTimeout(() => {
+        setNotification(false);
+      }, 3000);
+    
+      return () => clearTimeout(timeout);
+    }, [notification]);
 
     // localStorage.removeItem('tasks');
     return (
         <>
             {popup && (
-                <Popup closePopup={() => setPopup(false)} addTask={addTask}/>
+                <Popup 
+                    closePopup={() => setPopup(false)} 
+                    addTask={addTask} 
+                    handleOutsidePopupClick={handleOutsidePopupClick} 
+                />
             )}
             <Header />
             <Main
@@ -67,6 +108,7 @@ export default function Home() {
             > 
             </Main>
             <Footer />
+            {notification && <div className="notification-container">{notificationMessage}</div>}
             <div className="if-size-less-than-300">
                 <p>Sorry! We do not support mobile devices less than 300px wide.</p>
             </div>
