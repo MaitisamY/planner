@@ -1,20 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 /*
 .archivo-black-regular {
   font-family: "Manrope", sans-serif;
   font-weight: 400;
   font-style: normal;
-}
-
-.archivo-<uniquifier> {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
 }
 
 .manrope-<uniquifier> {
