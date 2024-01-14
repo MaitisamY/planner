@@ -82,7 +82,7 @@ export default function Home() {
       // Hide the notification after 3 seconds when notification state changes
       const timeout = setTimeout(() => {
         setNotification(false);
-      }, 3000);
+      }, 6000);
     
       return () => clearTimeout(timeout);
     }, [notification]);

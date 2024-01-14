@@ -76,7 +76,7 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                             id={`task-${index}`}
                             value={taskChanges[index]}
                             type="text"
-                            rows="5"
+                            rows="4"
                             cols="auto"
                             onChange={(e) => handleTaskChanges(e, index)}
                             spellCheck="false"

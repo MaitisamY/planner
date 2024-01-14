@@ -1,19 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 /*
 .archivo-black-regular {
-  font-family: "Archivo Black", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
 .archivo-<uniquifier> {
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: <weight>;
   font-style: normal;
   font-variation-settings:
     "wdth" 100;
+}
+
+.manrope-<uniquifier> {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
 }
 */
 
@@ -84,9 +92,9 @@ header {
   padding: 0;
   box-sizing: border-box;
   font-family: "Archivo Black", sans-serif;
-  font-weight: 400;
+  font-weight: 800;
   font-style: normal;
-  font-size: 28px;
+  font-size: 30px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
 }
@@ -134,7 +142,7 @@ footer {
   color: rgba(224, 173, 62, 0.952);
   padding: 20px;
   box-sizing: border-box;
-  font-family: "Archivo Black", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 18px;
@@ -151,6 +159,7 @@ footer a {
   text-decoration: underline;
   color: rgba(255, 255, 255, 0.65);
   cursor: pointer;
+  padding: 5px 0px;
 }
 
 footer a:hover {
@@ -174,24 +183,26 @@ footer span {
 .welcome {
   width: auto;
   height: auto;
+  max-width: 400px;
   color: #303030;
-  background-color: rgba(224, 173, 62, 0.952);
+  background: linear-gradient(90deg, rgba(255, 188, 45, 0.76) 0%, rgba(250, 190, 62, 0.76) 50%, rgba(253, 196, 73, 0.76) 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   padding: 20px;
   box-sizing: border-box;
-  font-family: "Archivo Black", sans-serif;
+  font-family: "Manrope", sans-serif;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
   color: #303030;
 }
 
 .welcome h2 {
-  font-size: 28px;
+  font-size: 26px;
   text-transform: uppercase;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 800;
   padding: 0;
@@ -202,7 +213,7 @@ footer span {
 .welcome h2 span {
   text-transform: none;
   font-size: 16px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
@@ -213,7 +224,7 @@ footer span {
   padding: 0;
   margin: 0 0 10px 0;
   font-size: 20px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
@@ -222,7 +233,7 @@ footer span {
 
 .welcome p {
   font-size: 17px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -233,6 +244,7 @@ footer span {
 
 .welcome ul {
   list-style-type: circle;
+  text-align: left;
   width: 100%;
   padding: 0 20px 20px 20px;
   margin: 0 0 20px 0;
@@ -242,7 +254,7 @@ footer span {
 
 .welcome ul li {
   font-size: 17px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: bold;
   font-style: normal;
@@ -250,10 +262,21 @@ footer span {
   margin: 5px 0;
 }
 
+.welcome ul a {
+  text-decoration: underline;
+  color: #474747;
+  cursor: pointer;
+  padding: 5px 0px;
+}
+
+.welcome ul a:hover {
+  color: #303030;
+}
+
 .welcome .create-task {
   padding: 10px 25px;
   font-size: 16px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -316,7 +339,7 @@ footer span {
   height: auto;/* Change it! */
   width: auto;
   color: #303030;
-  background-color: rgba(224, 173, 62, 0.952);
+  background: linear-gradient(90deg, rgba(255, 188, 45, 0.76) 0%, rgba(250, 190, 62, 0.76) 50%, rgba(253, 196, 73, 0.76) 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -332,7 +355,7 @@ footer span {
   top: 2px;
   right: 10px;
   font-size: 35px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 900;
   font-style: normal;
@@ -347,7 +370,7 @@ footer span {
 .popup .add-task h2 {
   font-size: 24px;
   text-transform: uppercase;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 800;
   font-style: normal;
@@ -356,7 +379,7 @@ footer span {
 
 .popup .add-task p {
   font-size: 18px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 800;
   font-style: normal;
@@ -364,13 +387,13 @@ footer span {
 }
 
 .popup .add-task h5 {
-  font-size: 15px;
+  font-size: 12px;
   margin: 0 0 10px 0;
   padding: 0;
   text-align: center;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 600;
+  font-weight: bold;
   font-style: normal;
   font-variation-settings: "wdth" 100;
 }
@@ -380,7 +403,7 @@ footer span {
   margin: 5px 0 10px 0;
   padding: 0;
   text-align: center;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
@@ -392,7 +415,7 @@ footer span {
   box-sizing: border-box;
   padding: 10px 15px;
   font-size: 18px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -410,7 +433,7 @@ footer span {
   box-sizing: border-box;
   padding: 10px 15px;
   font-size: 20px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -428,7 +451,7 @@ footer span {
   width: 100%;
   padding: 10px 25px;
   font-size: 16px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -468,9 +491,9 @@ footer span {
   position: relative;
   width: 300px;
   height: auto;
-  max-height: 360px;
+  max-height: 350px;
   color: #303030;
-  background-color: rgba(224, 173, 62, 0.952);
+  background: linear-gradient(90deg, rgba(224, 173, 62, 0.952) 0%, rgba(224, 173, 62, 0.8) 50%, rgba(253, 196, 73, 0.76) 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -478,7 +501,7 @@ footer span {
   text-align: left;
   padding: 20px;
   box-sizing: border-box;
-  font-family: "Archivo Black", sans-serif;
+  font-family: "Manrope", sans-serif;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
   border: none;
@@ -490,7 +513,7 @@ footer span {
 }
 
 .task-list .task-btns {
-  margin-top: 20px;
+  margin-top: 10px;
   width: 100%;
   box-sizing: border-box;
   place-self: center;
@@ -519,7 +542,7 @@ footer span {
 
 .task-list h2 {
   font-size: 24px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
@@ -527,7 +550,7 @@ footer span {
 }
 
 .task-list h3 {
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
@@ -544,7 +567,7 @@ footer span {
   overflow-y: auto;
   box-sizing: border-box;
   font-size: 22px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -558,7 +581,7 @@ footer span {
 
 .task-list p {
   font-size: 12px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: bold;
   font-style: normal;
@@ -574,7 +597,7 @@ footer span {
 .task-list .mark {
   padding: 10px 25px;
   font-size: 16px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -604,7 +627,7 @@ footer span {
   box-sizing: border-box;
   padding: 10px 15px;
   font-size: 18px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -624,7 +647,7 @@ footer span {
   box-sizing: border-box;
   padding: 10px 15px;
   font-size: 18px;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -679,7 +702,7 @@ footer span {
     margin: 0;
     padding: 0;
     line-height: 1.5;
-    font-family: "Archivo Black", sans-serif;
+    font-family: "Manrope", sans-serif;
     font-weight: 400;
     font-style: normal;
   }
@@ -698,7 +721,7 @@ footer span {
   border-radius: 10px;
   animation: slide-up 0.5s ease-out;
   text-align: center;
-  font-family: "Archivo", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;

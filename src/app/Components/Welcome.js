@@ -1,8 +1,10 @@
+import { useState } from 'react'
 export default function Welcome({ tasks, addNewTask }) {
+    const [features, setFeatures] = useState(0)
     return (
         <div className="welcome">
             <h2>
-                Welcome
+                Welcome To Planner
                 <br />
                 <span>A simple daily tasks maintainer app</span>
             </h2>
@@ -11,9 +13,19 @@ export default function Welcome({ tasks, addNewTask }) {
             </h3>
             <ul>
                 <li>Task creation with date specification</li>
-                <li>Task and due date editing</li>
+                <li>Task editing</li>
                 <li>Task deletion</li>
-                <li>Task marking as completed or pending</li>
+                {
+                    features === 0 ? 
+                    <a onClick={() => setFeatures(1)}>More features</a> :
+                    <>  
+                        <li>Task can be marked as completed or pending</li>
+                        <li>The newer task will appear first</li>
+                        <li>Due date can also be edited</li>
+                        <li>Tasks get moved to trash if due date is passed</li>
+                        <a onClick={() => setFeatures(0)}>Less features</a>
+                    </>
+                }
             </ul>
             <button onClick={addNewTask} className="create-task">
                 {tasks.length === 0 ? 'Create your first task' : 'Create Task'}
