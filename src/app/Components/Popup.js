@@ -3,7 +3,10 @@ import { formatDateToInput } from './DateUtil';
 export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) {
     const [newTask, setNewTask] = useState("");
     const [inputError, setInputError] = useState(null);
+    const [dateError, setDateError] = useState(null);
     const [selectedDate, setSelectedDate] = useState(formatDateToInput(new Date().toDateString()));
+    const todayDateString = new Date().toDateString();
+
     const handleNewTaskChange = (event) => {
         setNewTask(event.target.value);
     }
@@ -21,9 +24,14 @@ export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) 
         } else if(newTask.length > 125) {
             setInputError("Task must be at most 125 characters long!");
         } else {
-            const formattedDate = selectedDate ? new Date(selectedDate).toDateString() : new Date().toDateString();
+            const formattedDate = selectedDate ? new Date(selectedDate).toDateString() : todayDateString;
+
+            if(formattedDate < todayDateString) {
+                setDateError("Due date cannot be in the past!");
+                return;
+            }
         
-            addTask(newTask, new Date().toDateString(), null, formattedDate, "pending");
+            addTask(newTask, todayDateString, null, formattedDate, "pending");
             closePopup();
         }
     };
@@ -57,7 +65,8 @@ export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) 
                     <p>
                         Select date: <input type="date" value={selectedDate} onChange={handleDateChange} required />
                     </p>
-                    <h5>Default date: {new Date().toDateString()}</h5>
+                    {dateError && <h6 className="error">{dateError}</h6>}
+                    <h5>Default date: {todayDateString}</h5>
                     <button type="submit">Add</button>
                 </form>
             </div>

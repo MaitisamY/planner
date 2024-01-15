@@ -293,7 +293,7 @@ footer span {
   padding: 0 20px 20px 20px;
   margin: 0 0 20px 0;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(85, 85, 85, 0.1);
+  border-bottom: 1px solid rgba(85, 85, 85, 0.2);
 }
 
 .welcome ul li {
@@ -578,7 +578,7 @@ footer span {
 }
 
 .task-list .task-btns {
-  margin-top: 10px;
+  margin-top: 20px;
   width: 100%;
   box-sizing: border-box;
   place-self: center;
@@ -615,6 +615,7 @@ footer span {
 }
 
 .task-list h3 {
+  font-size: 17px;
   font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
@@ -649,7 +650,7 @@ footer span {
   font-variation-settings: "wdth" 100;
   padding: 5px 5px 15px 5px;
   margin: 0 0 10px 0;
-  border-bottom: 1px solid rgba(85, 85, 85, 0.3);
+  border-bottom: 1px solid rgba(85, 85, 85, 0.2);
   word-wrap: break-word;
   overflow-wrap: break-word;
 }

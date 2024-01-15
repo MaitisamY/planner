@@ -12,7 +12,7 @@ export default function Welcome({ tasks, addNewTask }) {
                 Features and Specs
             </h3>
             <ul>
-                <li>It is advised to keep tasks shorter, it will be easier for you to manage and go through them.</li>
+                <li>It is advised to keep tasks shorter, the maximum word limit is 100.</li>
                 <li>Tasks get moved to trash if due date is passed</li>
                 <li>The newer task will appear first</li>
                 {
@@ -20,7 +20,7 @@ export default function Welcome({ tasks, addNewTask }) {
                     <a onClick={() => setFeatures(1)}>Show more</a> :
                     <>  
                         <li>Task creation with date specification</li>
-                        <li>Task can be marked as completed or pending</li>
+                        <li>Task can be marked or unmarked as completed or pending</li>
                         <li>Task editing</li>
                         <li>Task deletion</li>
                         <li>Due date can also be edited</li>

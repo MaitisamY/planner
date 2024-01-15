@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { formatDateToInput, formatDateToOriginalFormat } from './DateUtil'
-import { BsTrash, BsPencil, BsX, BsCheckAll } from 'react-icons/bs'
+import { BsTrash, BsPencil, BsX, BsCheckAll, BsCheck } from 'react-icons/bs'
+import { MdCheck, MdCheckBoxOutlineBlank } from "react-icons/md"
 export default function Task({ tasks, markTask, deleteTask, editTask }) {
     const [editingTasks, setEditingTasks] = useState({});
     const [taskChanges, setTaskChanges] = useState({});
@@ -75,7 +76,7 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                 {
                     editingTasks[index] ? (
                     <form onSubmit={(e) => handleEditFormSubmit(e, index)}>
-                        <h3>Edit Task</h3>
+                        <h3>Edit task</h3>
                         <textarea
                             name={`task-${index}`}
                             id={`task-${index}`}
@@ -110,23 +111,38 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                     ) : (
                     <>    
                         <label 
-                            title={task.status === 'completed' ? 'Click to mark as pending' : 'Click to mark as completed'} 
+                            title={task.task.substring(0, 30) + '...'} 
                             className={task.status === 'completed' ? 'line-through' : ''}
-                        >
-                            <input 
-                                title={task.status === 'completed' ? 'Mark as pending' : 'Mark as completed'} 
-                                type="checkbox" 
-                                checked={task.status === 'completed'} 
-                                onChange={() => markTask(index)} 
-                            /> {' ' + task.task}
+                        > 
+                            {' ' + task.task}
                         </label>
                         <p>{ task.updatedDate ? `Last updated on: ${task.updatedDate}` : `Created on: ${task.date}` }</p>
                         <p>Due on: {task.dueDate}</p>
                         <div className="task-btns"> 
-                            <button onClick={() => (setStatus(task.status), startEditing(index))} title="Edit" className="task-common-btn">
+                            <button 
+                                onClick={() => markTask(index)} 
+                                title={task.status === 'completed' ? 'Mark as pending' : 'Mark as completed'} 
+                                className="task-common-btn"
+                            >
+                                {
+                                    task.status === 'completed' ? (
+                                        <MdCheckBoxOutlineBlank />
+                                    ) : (
+                                        <MdCheck />
+                                    )
+                                }
+                            </button>
+                            <button 
+                                onClick={() => (setStatus(task.status), startEditing(index))} 
+                                title="Edit" 
+                                className="task-common-btn"
+                            >
                                 <BsPencil />
                             </button>
-                            <button title="Delete" onClick={() => deleteTask(index)} className="task-common-btn">
+                            <button 
+                                title="Delete" onClick={() => deleteTask(index)} 
+                                className="task-common-btn"
+                            >
                                 <BsTrash />
                             </button>
                         </div>

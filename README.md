@@ -1,6 +1,6 @@
 **1. NEXT-JS PROJECT**
 ##  PLANNER 
-A simple daily tasks maintainer app with task and its date creation, edition, mark as completed or pending and deletion features.
+A simple daily tasks maintainer app with task and its date creation, edition, mark or unmark as completed or pending and deletion features.
 
 - Frontend web app
 - NPM react-icons is used.

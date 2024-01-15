@@ -75,7 +75,7 @@ export default function Trash({ tasks, markTask, deleteTask, reCreateTask }) {
                 {
                     editingTasks[index] ? (
                     <form onSubmit={(e) => handleEditFormSubmit(e, index)}>
-                        <h3>Edit Task</h3>
+                        <h3>Re create task</h3>
                         <textarea
                             name={`task-${index}`}
                             id={`task-${index}`}
@@ -90,7 +90,7 @@ export default function Trash({ tasks, markTask, deleteTask, reCreateTask }) {
                             required
                         >
                         </textarea>
-                        <h3>Edit due date</h3>
+                        <h3>Set new due date</h3>
                         <input 
                             type="date" 
                             value={dueDate}
