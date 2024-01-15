@@ -40,10 +40,6 @@
   background: rgba(0, 0, 0, 0.15);
 }
 
-.line-through {
-  text-decoration: line-through;
-}
-
 /* html */
 html {
   scroll-behavior: smooth;
@@ -69,6 +65,18 @@ body {
 /* Dev defined styles */
 .text-center {
   text-align: center;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.text-light {
+  color:rgba(250, 190, 62, 0.76);
 }
 
 /* Header */
@@ -99,7 +107,7 @@ header {
 main {
   width: 100%;
   height: auto;
-  min-height: 75vh;
+  min-height: 72vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -107,8 +115,51 @@ main {
   flex-wrap: wrap;
   gap: 10px;
   background-color: transparent;
-  padding: 0;
+  padding: 20px 0;
   box-sizing: border-box;
+  margin: 0;
+}
+
+.nav-bar {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background: none;
+}
+
+.nav-bar a {
+  text-decoration: none;
+  color: rgba(224, 173, 62, 0.952);
+  cursor: pointer;
+  padding: 10px 20px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 50px;
+}
+
+.nav-bar a.active {
+  background-color: #555555;
+  color: rgba(224, 173, 62, 0.952);
+}
+
+@media screen and (max-width: 500px) {
+  .nav-bar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: -5px;
+    gap: 10px;
+    background: linear-gradient(90deg, #303030 0%, #474747 50%, #555555 100%);
+    z-index: 2;
+    padding: 10px;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -130,7 +181,7 @@ footer {
   text-align: center;
   background-color: transparent;
   color: rgba(224, 173, 62, 0.952);
-  padding: 20px;
+  padding: 20px 0 10px 0;
   box-sizing: border-box;
   font-family: "Manrope", sans-serif;
   font-weight: 400;
@@ -143,22 +194,25 @@ footer p {
   font-size: 18px;
   padding: 0;
   margin: 0;
+  letter-spacing: 1.1px;
 }
 
 footer a {
   text-decoration: underline;
   color: rgba(255, 255, 255, 0.65);
   cursor: pointer;
-  padding: 5px 0px;
+  padding: 0;
+  letter-spacing: 1.1px;
 }
 
 footer a:hover {
-  color: rgba(224, 173, 62, 1);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 footer span {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 13px;
+  letter-spacing: 1.1px;
 }
 
 @media screen and (max-width: 500px) {
@@ -184,7 +238,7 @@ footer span {
   padding: 20px;
   box-sizing: border-box;
   font-family: "Manrope", sans-serif;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 6px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
   color: #303030;
 }
@@ -239,7 +293,7 @@ footer span {
   padding: 0 20px 20px 20px;
   margin: 0 0 20px 0;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(85, 85, 85, 0.3);
+  border-bottom: 1px solid rgba(85, 85, 85, 0.1);
 }
 
 .welcome ul li {
@@ -253,10 +307,17 @@ footer span {
 }
 
 .welcome ul a {
+  font-size: 15px;
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
   text-decoration: underline;
-  color: #474747;
+  color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
-  padding: 5px 0px;
+  padding: 0;
+  margin: 10px 0 0 0;
 }
 
 .welcome ul a:hover {
@@ -272,7 +333,7 @@ footer span {
   font-style: normal;
   font-variation-settings: "wdth" 100;
   background-color: #474747;
-  color: rgba(224, 173, 62, 0.952);
+  color: rgba(216, 168, 62, 1);
   border: none;
   outline: none;
   border-radius: 10px;
@@ -282,7 +343,6 @@ footer span {
 
 .welcome .create-task:hover {
   background-color: #303030;
-  color: rgba(224, 173, 62, 0.952);
   transition: 0.3s all ease-in-out;
   cursor: pointer;
 }
@@ -318,7 +378,7 @@ footer span {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 999;
   transition: 0.3s all ease-in-out;
   color: #303030;
 }
@@ -401,6 +461,18 @@ footer span {
   color: rgb(172, 16, 16);
 }
 
+.popup .add-task h6 span {
+  color: #303030;
+}
+
+.popup .add-task h6 span i {
+  font-style: normal;
+}
+
+.popup .add-task h6 span i.danger {
+  color: rgb(172, 16, 16);
+}
+
 .popup input[type="date"] {
   box-sizing: border-box;
   padding: 10px 15px;
@@ -474,6 +546,9 @@ footer span {
   .popup .add-task button {
     font-size: 16px;
   }
+  .popup input[type="date"] {
+    width: 100%;
+  }
 }
 
 /* Task List */
@@ -481,7 +556,7 @@ footer span {
   position: relative;
   width: 300px;
   height: auto;
-  max-height: 350px;
+  min-height: fit-content;
   color: #303030;
   background: linear-gradient(90deg, rgba(224, 173, 62, 0.952) 0%, rgba(224, 173, 62, 0.8) 50%, rgba(253, 196, 73, 0.76) 100%);
   display: flex;
@@ -549,12 +624,22 @@ footer span {
   margin: 0;
 }
 
+.task-list h6 {
+  font-size: 13px;
+  margin: 5px 0 10px 0;
+  padding: 0;
+  text-align: center;
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  color: rgb(172, 16, 16);
+}
+
 .task-list label {
   width: 100%;
   height: auto;
-  max-height: 230px;
-  overflow-x: hidden;
-  overflow-y: auto;
   box-sizing: border-box;
   font-size: 22px;
   font-family: "Manrope", sans-serif;
@@ -567,6 +652,14 @@ footer span {
   border-bottom: 1px solid rgba(85, 85, 85, 0.3);
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+
+.task-list label a {
+  display: block;
+  text-decoration: none;
+  color: #303030;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .task-list p {
@@ -717,6 +810,7 @@ footer span {
   font-style: normal;
   font-variation-settings: "wdth" 100;
   font-size: 18px;
+  border: none;
 }
 
 @keyframes slide-up {
@@ -746,8 +840,18 @@ footer span {
     width: 100%;
     font-size: 18px;
     box-sizing: border-box;
-    padding: 30px 20px;
+    padding: 20px;
     right: 0;
+    bottom: 0;
+    border: none;
     border-radius: 0;
+  }
+  @keyframes slide-up {
+    from {
+      transform: translateY(110%);
+    }
+    to {
+      transform: translateY(-1px);
+    }
   }
 }

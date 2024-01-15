@@ -66,6 +66,23 @@ export default function Home() {
       setNotification(true);
     };
 
+    const reCreateTask = (index, newTask, dueDate, status) => {
+      const newTasks = [...tasks];
+      newTasks[index] = {
+        ...newTasks[index],
+        task: newTask,
+        updatedDate: new Date().toDateString(),
+        dueDate: dueDate || newTasks[index].dueDate,
+        status,
+      };
+      setTasks(newTasks);
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
+
+      // Show success message
+      setNotificationMessage('Task re-created successfully!');
+      setNotification(true);
+    };
+
     const handleOutsidePopupClick = (event) => {
       if (event.target.id === 'popup' && popup) {
         setPopup(false);
@@ -105,6 +122,7 @@ export default function Home() {
                 markTask={markTask}
                 deleteTask={deleteTask}
                 editTask={editTask}
+                reCreateTask={reCreateTask}
             > 
             </Main>
             <Footer />

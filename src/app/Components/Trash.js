@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { formatDateToInput, formatDateToOriginalFormat } from './DateUtil'
-import { BsTrash, BsPencil, BsX, BsCheckAll } from 'react-icons/bs'
-export default function Task({ tasks, markTask, deleteTask, editTask }) {
+import { BsTrash, BsPencil, BsX, BsCheckAll, BsRepeat } from 'react-icons/bs'
+export default function Trash({ tasks, markTask, deleteTask, reCreateTask }) {
     const [editingTasks, setEditingTasks] = useState({});
     const [taskChanges, setTaskChanges] = useState({});
     const [status, setStatus] = useState(null);
     const [dueDate, setDueDate] = useState(null);
     const [error, setError] = useState(null);
     const todayDateString = new Date().toDateString();
-    const filteredTasks = tasks.filter((task) => new Date(task.dueDate) >= new Date(todayDateString));
+    const filteredTasks = tasks.filter((task) => new Date(task.dueDate) < new Date(todayDateString));
 
     const handleDueDateChange = (event) => {
         setDueDate(event.target.value);
@@ -61,16 +61,16 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
         e.preventDefault();
         const formattedDueDate = formatDateToOriginalFormat(dueDate || tasks[index].dueDate);
 
-        if (formattedDueDate < todayDateString) {
-            setError('Due date cannot be in the past!');
+        if (formattedDueDate <= todayDateString) {
+            setError('Due date cannot be in the past or today!');
         } else {
-            editTask(index, taskChanges[index], formattedDueDate, status);
+            reCreateTask(index, taskChanges[index], formattedDueDate, status);
             stopEditing(index);
         }
     };
 
     return (
-        filteredTasks && filteredTasks.map((task, index) => (
+        filteredTasks.length !== 0 ? filteredTasks.map((task, index) => (
             <div key={index} className="task-list">
                 {
                     editingTasks[index] ? (
@@ -96,11 +96,11 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                             value={dueDate}
                             onChange={handleDueDateChange} 
                         />
-                        {error && <h6 className="error">{error}</h6>}
+                        <h6>{error}</h6>
                         <p className="text-center">Modifying on: {new Date().toDateString()}</p>
                         <div className="task-btns">
-                        <button title="Update" className="task-common-btn" type="submit">
-                            <BsCheckAll />
+                        <button title="Re create" className="task-common-btn" type="submit">
+                            <BsRepeat />
                         </button>
                         <button onClick={() => stopEditing(index)} title="Cancel editing" className="task-common-btn">
                             <BsX />
@@ -109,23 +109,14 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                     </form>    
                     ) : (
                     <>    
-                        <label 
-                            title={task.status === 'completed' ? 'Click to mark as pending' : 'Click to mark as completed'} 
-                            className={task.status === 'completed' ? 'line-through' : ''}
-                        >
-                            <input 
-                                title={task.status === 'completed' ? 'Mark as pending' : 'Mark as completed'} 
-                                type="checkbox" 
-                                checked={task.status === 'completed'} 
-                                onChange={() => markTask(index)} 
-                            /> {' ' + task.task}
-                        </label>
+                        <label>{task.task}</label>
                         <p>{ task.updatedDate ? `Last updated on: ${task.updatedDate}` : `Created on: ${task.date}` }</p>
                         <p>Due on: {task.dueDate}</p>
                         <div className="task-btns"> 
                             <button onClick={() => (setStatus(task.status), startEditing(index))} title="Edit" className="task-common-btn">
                                 <BsPencil />
                             </button>
+                            
                             <button title="Delete" onClick={() => deleteTask(index)} className="task-common-btn">
                                 <BsTrash />
                             </button>
@@ -133,6 +124,6 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                     </>
                 )}
             </div>
-        ))
+        )) : <h2 className="text-light">Trash is empty</h2>
     )
 }

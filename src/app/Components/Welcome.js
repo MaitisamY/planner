@@ -9,21 +9,22 @@ export default function Welcome({ tasks, addNewTask }) {
                 <span>A simple daily tasks maintainer app</span>
             </h2>
             <h3>
-                Features
+                Features and Specs
             </h3>
             <ul>
-                <li>Task creation with date specification</li>
-                <li>Task editing</li>
-                <li>Task deletion</li>
+                <li>It is advised to keep tasks shorter, it will be easier for you to manage and go through them.</li>
+                <li>Tasks get moved to trash if due date is passed</li>
+                <li>The newer task will appear first</li>
                 {
                     features === 0 ? 
-                    <a onClick={() => setFeatures(1)}>More features</a> :
+                    <a onClick={() => setFeatures(1)}>Show more</a> :
                     <>  
+                        <li>Task creation with date specification</li>
                         <li>Task can be marked as completed or pending</li>
-                        <li>The newer task will appear first</li>
+                        <li>Task editing</li>
+                        <li>Task deletion</li>
                         <li>Due date can also be edited</li>
-                        <li>Tasks get moved to trash if due date is passed</li>
-                        <a onClick={() => setFeatures(0)}>Less features</a>
+                        <a onClick={() => setFeatures(0)}>Show less</a>
                     </>
                 }
             </ul>

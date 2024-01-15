@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { formatDateToInput } from './DateUtil';
 export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) {
     const [newTask, setNewTask] = useState("");
@@ -18,6 +18,8 @@ export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) 
             setInputError("Task cannot be empty!");
         } else if(newTask.length < 6) {
             setInputError("Task must be at least 6 characters long!");
+        } else if(newTask.length > 125) {
+            setInputError("Task must be at most 125 characters long!");
         } else {
             const formattedDate = selectedDate ? new Date(selectedDate).toDateString() : new Date().toDateString();
         
@@ -25,6 +27,10 @@ export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) 
             closePopup();
         }
     };
+
+    useEffect(() => {
+        newTask.length > 125 ? setInputError("Task must be at most 125 characters long!") : setInputError(null);
+    }, [newTask]);
 
     return (
         <div id="popup" className="popup" onClick={(e) => handleOutsidePopupClick(e)}>
@@ -43,7 +49,11 @@ export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) 
                         autoFocus
                     >
                     </textarea>
-                    {inputError && <h6 className="error">{inputError}</h6>}
+                    <h6>
+                        <span>(<i className={newTask.length < 6 ? 'danger' : newTask.length > 125 ? 'danger' : ''}>
+                        {newTask.length}</i>/125)</span> 
+                        {inputError && inputError}
+                    </h6>
                     <p>
                         Select date: <input type="date" value={selectedDate} onChange={handleDateChange} required />
                     </p>
