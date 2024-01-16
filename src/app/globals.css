@@ -360,12 +360,6 @@ footer span {
   .welcome p {
     font-size: 16px;
   }
-  .welcome .create-task {
-    font-size: 16px;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 20vh;
-  }
 }
 
 /* Add New Task Popup */
