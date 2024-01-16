@@ -7,7 +7,8 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
     const [taskChanges, setTaskChanges] = useState({});
     const [status, setStatus] = useState(null);
     const [dueDate, setDueDate] = useState(null);
-    const [error, setError] = useState(null);
+    const [dateError, setDateError] = useState(null);
+    const [taskError, setTaskError] = useState(null);
     const todayDateString = new Date().toDateString();
     const filteredTasks = tasks.filter((task) => new Date(task.dueDate) >= new Date(todayDateString));
 
@@ -62,11 +63,20 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
         e.preventDefault();
         const formattedDueDate = formatDateToOriginalFormat(dueDate || tasks[index].dueDate);
 
-        if (formattedDueDate < todayDateString) {
-            setError('Due date cannot be in the past!');
+        if (taskChanges[index].length === 0) {
+            setTaskError('Task cannot be empty!');
+        } else if(taskChanges[index].length < 6) {
+            setTaskError('Task must be at least 6 characters long!');
+        } else if (taskChanges[index].length > 125) {
+            setTaskError('Task must be at most 125 characters long!');
         } else {
-            editTask(index, taskChanges[index], formattedDueDate, status);
-            stopEditing(index);
+            if (formattedDueDate <= todayDateString) {
+                setDateError('Due date cannot be in the past!');
+            } else {
+                editTask(index, taskChanges[index], formattedDueDate, status);
+                stopEditing(index);
+            }
+
         }
     };
 
@@ -88,16 +98,16 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
                             spellCheck="false"
                             placeholder="Edit your task here"
                             autoFocus
-                            required
                         >
                         </textarea>
+                        {taskError && <h6 className="error">{taskError}</h6>}
                         <h3>Edit due date</h3>
                         <input 
                             type="date" 
                             value={dueDate}
                             onChange={handleDueDateChange} 
                         />
-                        {error && <h6 className="error">{error}</h6>}
+                        {dateError && <h6 className="error">{dateError}</h6>}
                         <p className="text-center">Modifying on: {new Date().toDateString()}</p>
                         <div className="task-btns">
                         <button title="Update" className="task-common-btn" type="submit">
