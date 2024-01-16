@@ -60,6 +60,8 @@ body {
   padding: 0;
   box-sizing: border-box;
   background: linear-gradient(90deg, #303030 0%, #474747 50%, #555555 100%);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* Dev defined styles */
@@ -123,6 +125,7 @@ main {
 .nav-bar {
   position: relative;
   width: 100%;
+  box-sizing: border-box;
   height: auto;
   display: flex;
   flex-direction: row;
