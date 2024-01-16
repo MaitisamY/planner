@@ -97,7 +97,7 @@ export default function Home() {
       return () => clearTimeout(timeout);
     }, [notification]);
 
-    localStorage.removeItem('tasks');
+    // localStorage.removeItem('tasks');
     return (
         <>
             {popup && (
