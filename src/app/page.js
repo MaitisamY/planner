@@ -7,14 +7,18 @@ import Footer from './Components/Footer'
 import Popup from './Components/Popup'
 
 export default function Home() {
-    const [count, setCount] = useState(0);
     const [tasks, setTasks] = useState([]);
     const [popup, setPopup] = useState(false);
     const [notification, setNotification] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
 
+    const generateTaskId = () => {
+      const timestamp = new Date().getTime();
+      return `task_${timestamp}`;
+    };
+  
     const addTask = (task, date, updatedDate, dueDate, status) => {
-      const newTask = { task, date, updatedDate, dueDate, status };
+      const newTask = { id: generateTaskId(), task, date, updatedDate, dueDate, status };
       setTasks((prevTasks) => {
         const updatedTasks = [newTask, ...prevTasks];
         localStorage.setItem('tasks', JSON.stringify(updatedTasks));
@@ -25,59 +29,48 @@ export default function Home() {
       setNotification(true);
     };
   
-    const markTask = (index) => {
-      const newTasks = [...tasks];
-      const currentStatus = newTasks[index].status;
-      newTasks[index].status = currentStatus === 'completed' ? 'pending' : 'completed';
+    const markTask = (id) => {
+      const newTasks = tasks.map((task) =>
+        task.id === id ? { ...task, status: task.status === 'completed' ? 'pending' : 'completed' } : task
+      );
       setTasks(newTasks);
       localStorage.setItem('tasks', JSON.stringify(newTasks));
-
+  
       // Show success message
-      const statusMessage = newTasks[index].status === 'completed' ? 'completed' : 'pending';
+      const statusMessage = newTasks.find((task) => task.id === id)?.status === 'completed' ? 'completed' : 'pending';
       setNotificationMessage(`Task marked as ${statusMessage}!`);
       setNotification(true);
     };
-
-    const deleteTask = (index) => {
-      const newTasks = [...tasks];
-      newTasks.splice(index, 1);
+  
+    const deleteTask = (id) => {
+      const newTasks = tasks.filter((task) => task.id !== id);
       setTasks(newTasks);
       localStorage.setItem('tasks', JSON.stringify(newTasks));
-
+  
       // Show success message
       setNotificationMessage('Task deleted successfully!');
       setNotification(true);
-    }
-
-    const editTask = (index, newTask, dueDate, status) => {
-      const newTasks = [...tasks];
-      newTasks[index] = {
-        ...newTasks[index],
-        task: newTask,
-        updatedDate: new Date().toDateString(),
-        dueDate: dueDate || newTasks[index].dueDate,
-        status,
-      };
+    };
+  
+    const editTask = (id, newTask, dueDate, status) => {
+      const newTasks = tasks.map((task) =>
+        task.id === id ? { ...task, task: newTask, updatedDate: new Date().toDateString(), dueDate, status } : task
+      );
       setTasks(newTasks);
       localStorage.setItem('tasks', JSON.stringify(newTasks));
-
+  
       // Show success message
       setNotificationMessage('Task updated successfully!');
       setNotification(true);
     };
-
-    const reCreateTask = (index, newTask, dueDate, status) => {
-      const newTasks = [...tasks];
-      newTasks[index] = {
-        ...newTasks[index],
-        task: newTask,
-        updatedDate: new Date().toDateString(),
-        dueDate: dueDate || newTasks[index].dueDate,
-        status,
-      };
+  
+    const reCreateTask = (id, newTask, dueDate, status) => {
+      const newTasks = tasks.map((task) =>
+        task.id === id ? { ...task, task: newTask, updatedDate: new Date().toDateString(), dueDate, status } : task
+      );
       setTasks(newTasks);
       localStorage.setItem('tasks', JSON.stringify(newTasks));
-
+  
       // Show success message
       setNotificationMessage('Task re-created successfully!');
       setNotification(true);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { formatDateToInput } from './DateUtil';
 export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) {
-    const [newTask, setNewTask] = useState("");
+    const [newTask, setNewTask] = useState('');
     const [inputError, setInputError] = useState(null);
     const [dateError, setDateError] = useState(null);
     const [selectedDate, setSelectedDate] = useState(formatDateToInput(new Date().toDateString()));
@@ -25,8 +25,9 @@ export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) 
             setInputError("Task must be at most 125 characters long!");
         } else {
             const formattedDate = selectedDate ? new Date(selectedDate).toDateString() : todayDateString;
+            const formattedDateObj = new Date(formattedDate);
 
-            if(formattedDate < todayDateString) {
+            if(formattedDateObj < new Date(new Date().setHours(0, 0, 0, 0))) {
                 setDateError("Due date cannot be in the past!");
                 return;
             }
@@ -63,7 +64,7 @@ export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) 
                         {inputError && inputError}
                     </h6>
                     <p>
-                        Select date: <input type="date" value={selectedDate} onChange={handleDateChange} required />
+                        Select date <input type="date" value={selectedDate} onChange={handleDateChange} required />
                     </p>
                     {dateError && <h6 className="error">{dateError}</h6>}
                     <h5>Default date: {todayDateString}</h5>

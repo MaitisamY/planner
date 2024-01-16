@@ -1,7 +1,7 @@
-import { useState } from "react"
-import Welcome from "./Welcome"
-import Task from "./Task"
-import Trash from "./Trash"
+import { useState } from 'react'
+import Welcome from './Welcome'
+import Task from './Task'
+import Trash from './Trash'
 export default function Main({ tasks, addNewTask, markTask, deleteTask, editTask, reCreateTask }) {
     const [nav, setNav] = useState(0)
 

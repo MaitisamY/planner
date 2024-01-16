@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         <meta name="author" content={metadata.author} />
         <link rel="icon" type="image/icon" href="/icon.png" sizes="any" />
       </head>
-      <body>{children}</body>
+      <body suppressHydrationWarning={true}>{children}</body>
     </html>
   )
 }

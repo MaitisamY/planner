@@ -9,10 +9,10 @@ export default function Welcome({ tasks, addNewTask }) {
                 <span>A simple daily tasks maintainer app</span>
             </h2>
             <h3>
-                Features and Specs
+                Features
             </h3>
             <ul>
-                <li>It is advised to keep tasks shorter, the maximum word limit is 100.</li>
+                <li>Maximum task text limit is 100 words.</li>
                 <li>Tasks get moved to trash if due date is passed</li>
                 <li>The newer task will appear first</li>
                 {
