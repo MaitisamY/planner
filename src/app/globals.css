@@ -212,8 +212,8 @@ main {
 @media screen and (max-width: 992px) {
   main {
     height: auto;
-    min-height: 92vh;
-    padding: 20px;
+    min-height: 90vh;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -454,7 +454,7 @@ footer span {
     height: auto;
     width: 100%;
     justify-content: center;
-    padding: 0;
+    padding: 0 20px 0 20px;
     margin: 0;
   }
   .task-holder-header {
@@ -796,7 +796,6 @@ footer span {
   padding: 0 20px 20px 20px;
   margin: 10px 0 20px 0;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(85, 85, 85, 0.2);
 }
 
 .popup ul li {
