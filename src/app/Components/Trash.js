@@ -128,7 +128,7 @@ export default function Trash({ views, tasks, deleteTask, reCreateTask }) {
         />
       )
     ) : (
-      <div className={`fade-grid-view ${fadeIn ? 'fade-in' : ''}`} >
+      <div className={`fade-effect ${fadeIn ? 'fade-in' : ''}`} >
         <h3 className="text-light font-manrope">Trash is empty</h3>
       </div>
     )    
