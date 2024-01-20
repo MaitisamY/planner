@@ -4,15 +4,14 @@ export default function Welcome({ tasks, addNewTask }) {
     return (
         <div className="welcome">
             <h2>
-                Welcome To Planner
-                <br />
-                <span>A simple daily tasks maintainer app</span>
+                Welcome
             </h2>
-            <h3>
+            <h3>A simple daily tasks maintainer app</h3>
+            <h2>
                 Features
-            </h3>
+            </h2>
             <ul>
-                <li>Maximum task text limit is 100 words.</li>
+                <li>{`Maximum task's text limit is 100 words.`}</li>
                 <li>Tasks get moved to trash if due date is passed</li>
                 <li>The newer task will appear first</li>
                 {

@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { formatDateToInput, formatDateToOriginalFormat } from './DateUtil';
-import { BsTrash, BsPencil, BsX, BsCheckAll } from 'react-icons/bs';
-import { MdCheck, MdCheckBoxOutlineBlank } from 'react-icons/md';
+import { useState, useEffect } from 'react'
+import { formatDateToInput, formatDateToOriginalFormat } from './DateUtil'
+import GridView from './active/GridView'
+import ListView from './active/ListView'
 
-export default function Task({ tasks, markTask, deleteTask, editTask }) {
+export default function Task({ views, tasks, markTask, deleteTask, editTask }) {
   const [editingTasks, setEditingTasks] = useState({});
   const [taskChanges, setTaskChanges] = useState({});
   const [status, setStatus] = useState(null);
   const [dueDate, setDueDate] = useState(null);
   const [dateError, setDateError] = useState(null);
   const [taskError, setTaskError] = useState(null);
+  const [fadeIn, setFadeIn] = useState(false);
   const todayDateString = new Date().toDateString();
   const filteredTasks = tasks.filter((task) => new Date(task.dueDate) >= new Date(todayDateString));
 
@@ -81,89 +82,56 @@ export default function Task({ tasks, markTask, deleteTask, editTask }) {
     }
   };
 
+  useEffect(() => {
+    // Add a small delay before applying the fade-in effect
+    const timeout = setTimeout(() => {
+    setFadeIn(true);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
-    filteredTasks &&
-    filteredTasks.map((task) => (
-      <div key={task.id} className="task-list">
-        {editingTasks[task.id] ? (
-          <form onSubmit={(e) => handleEditFormSubmit(e, task.id)}>
-            <h3>Edit task</h3>
-            <textarea
-              name={`task-${task.id}`}
-              id={`task-${task.id}`}
-              value={taskChanges[task.id]}
-              type="text"
-              rows="4"
-              onChange={(e) => handleTaskChanges(e, task.id)}
-              placeholder="Edit your task here"
-              autoFocus
-            ></textarea>
-            {taskError && <h6 className="error">{taskError}</h6>}
-            <h3>Edit due date</h3>
-            <input type="date" value={dueDate} onChange={handleDueDateChange} />
-            {dateError && <h6 className="error">{dateError}</h6>}
-            <p className="text-center">Modifying on: {new Date().toDateString()}</p>
-            <div className="task-btns">
-              <button title="Update" className="task-common-btn" type="submit">
-                <BsCheckAll />
-              </button>
-              <button
-                onClick={() => stopEditing(task.id)}
-                title="Cancel editing"
-                className="task-common-btn"
-              >
-                <BsX />
-              </button>
-            </div>
-          </form>
-        ) : (
-          <>
-            <label
-              title={task.task.substring(0, 30) + '...'}
-              className={task.status === 'completed' ? 'line-through' : ''}
-            >
-              {' ' + task.task}
-            </label>
-            <p>
-              {task.updatedDate
-                ? `Last updated on: ${task.updatedDate}`
-                : `Created on: ${task.date}`}
-            </p>
-            <p>Due on: {task.dueDate}</p>
-            <div className="task-btns">
-              <button
-                onClick={() => markTask(task.id)}
-                title={
-                  task.status === 'completed'
-                    ? 'Mark as pending'
-                    : 'Mark as completed'
-                }
-                className="task-common-btn"
-              >
-                {task.status === 'completed' ? (
-                  <MdCheckBoxOutlineBlank />
-                ) : (
-                  <MdCheck />
-                )}
-              </button>
-              <button
-                onClick={() => (setStatus(task.status), startEditing(task.id))}
-                title="Edit"
-                className="task-common-btn"
-              >
-                <BsPencil />
-              </button>
-              <button
-                title="Delete"
-                onClick={() => deleteTask(task.id)}
-                className="task-common-btn"
-              >
-                <BsTrash />
-              </button>
-            </div>
-          </>
-        )}
+    filteredTasks.length !== 0 ? (
+      views === 0 ? (
+        <GridView
+          filteredTasks={filteredTasks}
+          markTask={markTask}
+          deleteTask={deleteTask}
+          startEditing={startEditing}
+          editingTasks={editingTasks}
+          taskChanges={taskChanges}
+          dueDate={dueDate}
+          dateError={dateError}
+          taskError={taskError}
+          handleEditFormSubmit={handleEditFormSubmit}
+          stopEditing={stopEditing}
+          handleDueDateChange={handleDueDateChange}
+          handleTaskChanges={handleTaskChanges}
+          setStatus={setStatus}
+        />
+      ) : (
+        <ListView
+          filteredTasks={filteredTasks}
+          markTask={markTask}
+          deleteTask={deleteTask}
+          startEditing={startEditing}
+          editingTasks={editingTasks}
+          taskChanges={taskChanges}
+          dueDate={dueDate}
+          dateError={dateError}
+          taskError={taskError}
+          handleEditFormSubmit={handleEditFormSubmit}
+          stopEditing={stopEditing}
+          handleDueDateChange={handleDueDateChange}
+          handleTaskChanges={handleTaskChanges}
+          setStatus={setStatus}
+        />
+      )
+    ) : (
+      <div className={`fade-effect ${fadeIn ? 'fade-in' : ''}`}>
+        <h3 className="text-light font-manrope">Your tasks will show up here.</h3>
       </div>
-    ))
+    )
   );
 }

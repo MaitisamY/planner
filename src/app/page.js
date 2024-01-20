@@ -1,21 +1,27 @@
 'use client'
 import { useState, useEffect } from 'react'
 import './globals.css'
-import Header from './Components/Header'
+
 import Main from './Components/Main'
-import Footer from './Components/Footer'
 import Popup from './Components/Popup'
+import Feature from './Components/Feature'
 
 export default function Home() {
     const [tasks, setTasks] = useState([]);
     const [popup, setPopup] = useState(false);
+    const [features, setFeatures] = useState(false);
     const [notification, setNotification] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
-
+    const [views, setViews] = useState(0);
+    
     const generateTaskId = () => {
       const timestamp = new Date().getTime();
       return `task_${timestamp}`;
     };
+
+    const handleViews = (id) => {
+      setViews(id);
+    }
   
     const addTask = (task, date, updatedDate, dueDate, status) => {
       const newTask = { id: generateTaskId(), task, date, updatedDate, dueDate, status };
@@ -81,6 +87,12 @@ export default function Home() {
         setPopup(false);
       }
     };
+
+    const handleOutsideFeatureClick = (event) => {
+      if (event.target.id === 'feature' && features) {
+        setFeatures(false);
+      }
+    }
   
     useEffect(() => {
       // Load tasks from local storage on component mount
@@ -107,18 +119,25 @@ export default function Home() {
                     handleOutsidePopupClick={handleOutsidePopupClick} 
                 />
             )}
-            <Header />
+            {features && (
+                <Feature
+                    closeFeatures={() => setFeatures(false)}
+                    handleOutsideFeatureClick={handleOutsideFeatureClick}
+                />
+            )}
             <Main
                 tasks={tasks}
                 addNewTask={() => setPopup(!popup)}
+                showFeatures={() => setFeatures(!features)}
                 addTask={addTask}
                 markTask={markTask}
                 deleteTask={deleteTask}
                 editTask={editTask}
                 reCreateTask={reCreateTask}
+                views={views}
+                handleViews={handleViews}
             > 
             </Main>
-            <Footer />
             {notification && <div className="notification-container">{notificationMessage}</div>}
             <div className="if-size-less-than-300">
                 <p>Sorry! We do not support mobile devices less than 300px wide.</p>
