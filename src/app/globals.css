@@ -347,6 +347,7 @@ footer span {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  text-align: center;
   gap: 20px;
   padding: 0 20px 0 0;
 }
@@ -458,6 +459,7 @@ footer span {
   }
   .task-holder-header {
     width: 100%;
+    padding: 0;
   }
   .task-holder-header-nav {
     width: auto;
