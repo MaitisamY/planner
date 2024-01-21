@@ -1,15 +1,34 @@
 import { useEffect, useState } from 'react'
-import { BsTrash, BsPencil, BsX, BsRepeat } from 'react-icons/bs'
-export default function TrashGridView({ filteredTasks, startEditing, editingTasks, taskChanges, dueDate, dateError, taskError, handleEditFormSubmit, stopEditing, handleDueDateChange, handleTaskChanges, deleteTask, setStatus }) {
+import { 
+  BsTrash, 
+  BsPencil, 
+  BsX, 
+  BsRepeat 
+} from 'react-icons/bs'
+export default function TrashGridView({ 
+  filteredTasks, 
+  startEditing, 
+  editingTasks, 
+  taskChanges, 
+  dueDate, 
+  dateError, 
+  taskError, 
+  handleEditFormSubmit, 
+  stopEditing, 
+  handleDueDateChange, 
+  handleTaskChanges, 
+  deleteTask, 
+  setStatus 
+}) {
     const [fadeIn, setFadeIn] = useState(false);
 
     useEffect(() => {
-        // Add a small delay before applying the fade-in effect
-        const timeout = setTimeout(() => {
-        setFadeIn(true);
-        }, 500);
+      // Add a small delay before applying the fade-in effect
+      const timeout = setTimeout(() => {
+      setFadeIn(true);
+      }, 500);
 
-        return () => clearTimeout(timeout);
+      return () => clearTimeout(timeout);
     }, []);
     return (
         filteredTasks.map((task) => (

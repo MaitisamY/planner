@@ -1,10 +1,20 @@
 'use client'
 import { useState, useEffect } from 'react'
 import './globals.css'
-
 import Main from './Components/Main'
 import Popup from './Components/Popup'
 import Feature from './Components/Feature'
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  WhatsappIcon
+} from 'react-share'
+import { BsShare } from 'react-icons/bs'
 
 export default function Home() {
     const [tasks, setTasks] = useState([]);
@@ -13,6 +23,8 @@ export default function Home() {
     const [notification, setNotification] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
     const [views, setViews] = useState(0);
+    const shareUrl = 'http://localhost:3000';
+    const shareMessage = `I use this app to maintain my daily tasks. Check out the app At:`;
     
     const generateTaskId = () => {
       const timestamp = new Date().getTime();
@@ -138,6 +150,21 @@ export default function Home() {
                 handleViews={handleViews}
             > 
             </Main>
+            <div className="share-buttons-mobile">
+                <span title="Share our app on social media"><BsShare /></span>
+                <FacebookShareButton url={shareUrl} quote={shareMessage}>
+                    <FacebookIcon title="Share on Facebook" className="fb" size={25} />
+                </FacebookShareButton>
+                <TwitterShareButton url={shareUrl} title={shareMessage}>
+                    <TwitterIcon title="Share on Twitter" className="tw" size={25} />
+                </TwitterShareButton>
+                <LinkedinShareButton url={shareUrl} summary={shareMessage}>
+                    <LinkedinIcon title="Share on LinkedIn" className="in" size={25} />
+                </LinkedinShareButton>
+                <WhatsappShareButton url={shareUrl} title={shareMessage}>
+                    <WhatsappIcon title="Share on WhatsApp" className="wa" size={25} />
+                </WhatsappShareButton>
+            </div>
             {notification && <div className="notification-container">{notificationMessage}</div>}
             <div className="if-size-less-than-300">
                 <p>Sorry! We do not support mobile devices less than 300px wide.</p>

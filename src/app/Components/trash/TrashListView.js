@@ -1,6 +1,25 @@
 import { useEffect, useState } from 'react'
-import { BsTrash, BsPencil, BsX, BsRepeat } from 'react-icons/bs'
-export default function TrashListView({ filteredTasks, editingTasks, startEditing, taskChanges, dueDate, dateError, taskError, handleEditFormSubmit, stopEditing, handleDueDateChange, handleTaskChanges, deleteTask, setStatus }) {
+import { 
+  BsTrash, 
+  BsPencil, 
+  BsX, 
+  BsRepeat 
+} from 'react-icons/bs'
+export default function TrashListView({ 
+  filteredTasks, 
+  editingTasks, 
+  startEditing, 
+  taskChanges, 
+  dueDate, 
+  dateError, 
+  taskError, 
+  handleEditFormSubmit, 
+  stopEditing, 
+  handleDueDateChange, 
+  handleTaskChanges, 
+  deleteTask, 
+  setStatus 
+}) {
   const [fadeIn, setFadeIn] = useState(false);
 
   useEffect(() => {
@@ -55,7 +74,7 @@ export default function TrashListView({ filteredTasks, editingTasks, startEditin
                       ? `Updated on: ${task.updatedDate}`
                       : `Created on: ${task.date}`}
                   </p>
-                  <p> | </p>
+                  <p id="pipe"> | </p>
                   <p>Due on: {task.dueDate}</p>
                   <button
                     onClick={() => (setStatus(task.status), startEditing(task.id))}

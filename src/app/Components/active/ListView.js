@@ -1,15 +1,35 @@
 import { useEffect, useState } from 'react'
-import { BsTrash, BsPencil, BsX, BsCheckAll } from 'react-icons/bs'
-export default function ListView({ filteredTasks, startEditing, editingTasks, taskChanges, dueDate, dateError, taskError, handleEditFormSubmit, stopEditing, handleDueDateChange, handleTaskChanges, deleteTask, setStatus, markTask }) {
+import {
+  BsTrash, 
+  BsPencil, 
+  BsX, 
+  BsCheckAll
+} from 'react-icons/bs'
+export default function ListView({ 
+  filteredTasks, 
+  startEditing, 
+  editingTasks, 
+  taskChanges, 
+  dueDate, 
+  dateError, 
+  taskError, 
+  handleEditFormSubmit, 
+  stopEditing, 
+  handleDueDateChange, 
+  handleTaskChanges, 
+  deleteTask, 
+  setStatus, 
+  markTask 
+}) {
     const [fadeIn, setFadeIn] = useState(false);
 
     useEffect(() => {
-        // Add a small delay before applying the fade-in effect
-        const timeout = setTimeout(() => {
-        setFadeIn(true);
-        }, 500);
+      // Add a small delay before applying the fade-in effect
+      const timeout = setTimeout(() => {
+      setFadeIn(true);
+      }, 500);
 
-        return () => clearTimeout(timeout);
+      return () => clearTimeout(timeout);
     }, []);
     return (
         filteredTasks.map((task) => (
@@ -63,7 +83,7 @@ export default function ListView({ filteredTasks, startEditing, editingTasks, ta
                         ? `Updated on: ${task.updatedDate}`
                         : `Created on: ${task.date}`}
                     </p> 
-                    <p> | </p> 
+                    <p id="pipe"> | </p> 
                     <p>Due on: {task.dueDate}</p>
                     <button
                       onClick={() => (setStatus(task.status), startEditing(task.id))}

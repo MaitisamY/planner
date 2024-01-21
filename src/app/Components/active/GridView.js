@@ -1,16 +1,36 @@
 import { useEffect, useState } from 'react'
-import { BsTrash, BsPencil, BsX, BsCheckAll } from 'react-icons/bs'
+import { 
+  BsTrash, 
+  BsPencil, 
+  BsX, 
+  BsCheckAll 
+} from 'react-icons/bs'
 import { MdCheck, MdCheckBoxOutlineBlank } from 'react-icons/md'
-export default function GridView({ filteredTasks, startEditing, editingTasks, taskChanges, dueDate, dateError, taskError, handleEditFormSubmit, stopEditing, handleDueDateChange, handleTaskChanges, deleteTask, setStatus, markTask }) {
+export default function GridView({ 
+  filteredTasks, 
+  startEditing, 
+  editingTasks, 
+  taskChanges, 
+  dueDate, 
+  dateError, 
+  taskError, 
+  handleEditFormSubmit, 
+  stopEditing, 
+  handleDueDateChange, 
+  handleTaskChanges, 
+  deleteTask, 
+  setStatus, 
+  markTask 
+}) {
     const [fadeIn, setFadeIn] = useState(false);
 
     useEffect(() => {
-        // Add a small delay before applying the fade-in effect
-        const timeout = setTimeout(() => {
-        setFadeIn(true);
-        }, 500);
+      // Add a small delay before applying the fade-in effect
+      const timeout = setTimeout(() => {
+      setFadeIn(true);
+      }, 500);
 
-        return () => clearTimeout(timeout);
+      return () => clearTimeout(timeout);
     }, []);
     return (
         filteredTasks.map((task) => (

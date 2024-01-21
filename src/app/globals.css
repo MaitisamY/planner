@@ -133,7 +133,8 @@ header h1 {
 header img {
   padding: 0;
   margin: 0;
-  width: 230px;
+  width: auto;
+  height: auto;
 }
 
 @media screen and (max-width: 992px) {
@@ -505,7 +506,7 @@ footer span {
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  padding: 20px 0 20px 0;
+  padding: 20px 0 0 0;
   box-sizing: border-box;
   font-family: "Manrope", sans-serif;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 6px 0 rgba(0, 0, 0, 0.19);
@@ -937,6 +938,11 @@ footer span {
   background-color: #303030;
 }
 
+.list-view .task-common-btn span {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
 .list-view p {
   font-size: 12px;
   font-family: "Manrope", sans-serif;
@@ -1018,6 +1024,9 @@ footer span {
   .list-view textarea {
     width: 100%;
   }
+  #pipe {
+    display: none;
+  }
 }
 
 .fade-grid-view {
@@ -1037,7 +1046,6 @@ footer span {
 .fade-list-view.fade-in {
   opacity: 1;
 }
-
 
 /* Task List */
 .grid-view {
@@ -1067,6 +1075,7 @@ footer span {
 }
 
 .grid-view .task-btns {
+  position: relative;
   margin-top: 20px;
   width: 100%;
   box-sizing: border-box;
@@ -1092,6 +1101,11 @@ footer span {
 
 .grid-view .task-common-btn:hover {
   background-color: #303030;
+}
+
+.grid-view .task-common-btn span {
+  font-size: 16px;
+  vertical-align: middle;
 }
 
 .grid-view h2 {
@@ -1234,6 +1248,93 @@ footer span {
   margin: 5px 0 10px 0;
 }
 
+.list-view .share-buttons {
+  width: auto;
+  height: fit-content;
+  margin: 0 auto 20% auto;
+}
+
+.share-buttons-mobile {
+  display: none;
+}
+
+.share-buttons {
+  width: 100%;
+  max-height: 150px;
+  box-sizing: border-box;
+  background-color: #474747;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 10px 0 10px;
+  margin: 10px 0 0 0;
+  font-size: 25px;
+  vertical-align: middle;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.share-buttons span {
+  font-size: 20px;
+  color: rgba(224, 173, 62, 0.952);
+  border: none;
+}
+
+.fb {
+  border-radius: 10px;
+  margin: 10px 0 0 0;
+  padding: 0;
+  margin: 0;
+}
+
+.fb:hover {
+  box-shadow: 0 0 8px 0 #3b5998;
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+}
+
+.tw {
+  border-radius: 10px;
+  margin: 10px 0 0 0;
+  padding: 0;
+  margin: 0;
+}
+
+.tw:hover {
+  box-shadow: 0 0 8px 0 #55acee;
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+}
+
+.in {
+  border-radius: 10px;
+  margin: 10px 0 0 0;
+  padding: 0;
+  margin: 0;
+}
+
+.in:hover {
+  box-shadow: 0 0 8px 0 #0077b5;
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+}
+
+.wa {
+  border-radius: 10px;
+  margin: 10px 0 0 0;
+  padding: 0;
+  margin: 0;
+}
+
+.wa:hover {
+  box-shadow: 0 0 8px 0 #25d366;
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+}
+
 @media screen and (max-width: 992px) {
   .grid-view {
     width: 45%;
@@ -1247,6 +1348,32 @@ footer span {
   }
   .grid-view .mark {
     font-size: 16px;
+  }
+  .share-buttons-mobile {
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 35%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px;
+    margin: 0;
+    font-size: 22px;
+    vertical-align: middle;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.01), 0 1px 1px 0 rgba(0, 0, 0, 0.01);
+    z-index: 1;
+  }
+  .share-buttons-mobile span {
+    padding: 10px 10px 4px 10px;
+    font-size: 20px;
+    color: rgba(224, 173, 62, 0.952);
+    border: none;
   }
 }
 
