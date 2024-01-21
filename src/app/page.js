@@ -23,7 +23,7 @@ export default function Home() {
     const [notification, setNotification] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
     const [views, setViews] = useState(0);
-    const shareUrl = 'http://localhost:3000';
+    const shareUrl = 'https://next-to-do-app-nu.vercel.app/';
     const shareMessage = `I use this app to maintain my daily tasks. Check out the app At:`;
     
     const generateTaskId = () => {

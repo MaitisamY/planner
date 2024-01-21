@@ -13,7 +13,7 @@ import {
 export default function Welcome({ tasks, addNewTask }) {
     const [features, setFeatures] = useState(0)
 
-    const shareUrl = 'http://localhost:3000';
+    const shareUrl = 'https://next-to-do-app-nu.vercel.app/';
     const shareMessage = `I use this app to maintain my daily tasks. Check out the app At:`;
 
     return (
