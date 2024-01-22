@@ -24,7 +24,7 @@ export default function Welcome({ tasks, addNewTask }) {
             <button onClick={addNewTask} className="create-task">
                 {tasks.length === 0 ? 'Create your first task' : 'Create Task'}
             </button>
-            <h4>Kindly hare our app on social media</h4>
+            <h4>Kindly share our app on social media</h4>
             <div className="share-buttons">
                 <FacebookShareButton url={shareUrl} quote={shareMessage}>
                     <FacebookIcon title="Share on Facebook" className="fb" size={28} />
