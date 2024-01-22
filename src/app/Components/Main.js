@@ -5,11 +5,7 @@ import Footer from './Footer'
 import Task from './Task'
 import Trash from './Trash'
 import { MdGridView, MdFormatListBulleted } from 'react-icons/md'
-import { 
-  BsFillHouseDoorFill, 
-  BsPlusLg, 
-  BsExclamationDiamond 
-} from 'react-icons/bs'
+import { BsFillHouseDoorFill, BsExclamationDiamond } from 'react-icons/bs'
 import { MdBookmarkRemove } from 'react-icons/md'
 export default function Main({ 
   views, 
@@ -56,7 +52,7 @@ export default function Main({
                             onClick={() => handleNavClick(0)} 
                             className={nav === 0 ? "active" : ""}
                         >
-                            <BsFillHouseDoorFill />
+                            <BsFillHouseDoorFill /> &nbsp; <i>Home</i>
                             {
                                 filteredActiveTasks.length === 0 ? '' : 
                                 <span>{filteredActiveTasks.length > 0 ? filteredActiveTasks.length : ''}</span>
@@ -67,26 +63,18 @@ export default function Main({
                             onClick={() => handleNavClick(1)}
                             className={nav === 1 ? "active" : ""}
                         >
-                            <MdBookmarkRemove />
+                            <MdBookmarkRemove /> &nbsp; <i>Trash</i>
                             {
                                 filteredTrashTasks.length === 0 ? '' : 
                                 <span>{filteredTrashTasks.length > 0 ? filteredTrashTasks.length : ''}</span>
                             }
                         </a>
-                        <div className="task-mobile-view-btns">
-                            <a 
-                                title="Features"
-                                onClick={showFeatures} 
-                            >
-                                <BsExclamationDiamond />
-                            </a>
-                            <a 
-                                title="Create Task"
-                                onClick={addNewTask}
-                            >
-                                <BsPlusLg />
-                            </a>
-                        </div>
+                        <a 
+                            title="Features"
+                            onClick={showFeatures} 
+                        >
+                            <BsExclamationDiamond /> &nbsp; <i>Features</i>
+                        </a>
                     </div>
                     <div className="task-holder-header-view">
                         <button 

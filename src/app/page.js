@@ -14,7 +14,7 @@ import {
   LinkedinIcon,
   WhatsappIcon
 } from 'react-share'
-import { BsShare } from 'react-icons/bs'
+import { BsShare, BsPlusLg } from 'react-icons/bs'
 
 export default function Home() {
     const [tasks, setTasks] = useState([]);
@@ -165,9 +165,16 @@ export default function Home() {
                     <WhatsappIcon title="Share on WhatsApp" className="wa" size={25} />
                 </WhatsappShareButton>
             </div>
+            <a 
+                title="Create Task"
+                onClick={() => setPopup(!popup)}
+                className="create-task-btn-mobile"
+            >
+                <BsPlusLg />
+            </a>
             {notification && <div className="notification-container">{notificationMessage}</div>}
             <div className="if-size-less-than-300">
-                <p>Sorry! We do not support mobile devices less than 300px wide.</p>
+                <p>Sorry! We do not support mobile devices less than 300 pixels wide.</p>
             </div>
         </>
     );

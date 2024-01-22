@@ -400,14 +400,26 @@ footer span {
   text-decoration: none;
   color: rgba(224, 173, 62, 0.952);
   cursor: pointer;
-  padding: 6px 6px 2px 6px;
+  padding: 6px 6px 6px 6px;
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-style: normal;
   font-size: 18px;
   border-radius: 50px;
   transition: 0.5s all ease-in-out;
+  vertical-align: middle;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-holder-header-nav a i {
+  font-size: 13px; 
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  font-weight: bold;
 }
 
 .task-holder-header-nav a.active {
@@ -433,7 +445,7 @@ footer span {
   transition: 0.5s all ease-in-out;
 }
 
-.task-mobile-view-btns {
+.create-task-btn-mobile {
   display: none;
 }
 
@@ -477,20 +489,33 @@ footer span {
     padding: 0;
     margin: 0;
   }
-  .task-mobile-view-btns {
-    width: auto;
-    box-sizing: border-box;
-    height: auto;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 0 20px 0 20px;
-  }
   .task-holder-header-nav a {
-    font-size: 22px;
-    padding: 6px 8px 2px 8px;
+    font-size: 20px;
+    padding: 4px 8px 4px 8px;
+  }
+  .task-holder-header-nav a.active {
+    transform: scale(1);
+  }
+  .create-task-btn-mobile {
+    display: block;
+    position: fixed;
+    bottom: 12%;
+    right: 8px;
+    background-color: rgba(216, 168, 62, 1);
+    color: #474747;
+    border-radius: 50px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s all ease-in-out;
+    cursor: pointer;
+    padding: 8px 8px 4px 8px; 
+    font-size: 20px;
+    z-index: 1;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    text-decoration: none;
   }
 }
 
@@ -528,8 +553,19 @@ footer span {
 }
 
 .welcome h3 {
-  padding: 0;
+  padding: 0 10px 0 10px;
   margin: 5px 0 15px 0;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.welcome h4 {
+  padding: 0 10px 0 10px;
+  margin: 20px 0 0 0;
   font-size: 14px;
   font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
@@ -588,6 +624,7 @@ footer span {
 }
 
 .welcome .create-task {
+  width: 80%;
   padding: 10px 25px;
   font-size: 16px;
   font-family: "Manrope", sans-serif;
@@ -1259,10 +1296,9 @@ footer span {
 }
 
 .share-buttons {
-  width: 100%;
+  width: 90%;
   max-height: 150px;
   box-sizing: border-box;
-  background-color: #474747;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -1270,16 +1306,19 @@ footer span {
   flex-wrap: wrap;
   gap: 10px;
   padding: 10px 10px 0 10px;
-  margin: 10px 0 0 0;
+  margin: 10px 0 10px 0;
   font-size: 25px;
   vertical-align: middle;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .share-buttons span {
   font-size: 20px;
-  color: rgba(224, 173, 62, 0.952);
+  color: #303030;
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
   border: none;
 }
 
@@ -1407,11 +1446,14 @@ footer span {
     color: rgba(224, 173, 62, 1);
     text-align: center;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     line-height: 1.5;
     font-family: "Manrope", sans-serif;
     font-weight: 400;
     font-style: normal;
+  }
+  .share-buttons-mobile {
+    display: none;
   }
 }
 
