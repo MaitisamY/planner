@@ -1180,7 +1180,8 @@ footer span {
 
 .grid-view label {
   width: 100%;
-  height: auto;
+  height: 250px;
+  vertical-align: middle;
   box-sizing: border-box;
   font-size: 22px;
   font-family: "Manrope", sans-serif;
@@ -1384,6 +1385,9 @@ footer span {
   }
   .grid-view p {
     font-size: 16px;
+  }
+  .grid-view label {
+    height: auto;
   }
   .grid-view .mark {
     font-size: 16px;
