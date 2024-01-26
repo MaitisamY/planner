@@ -499,17 +499,17 @@ footer span {
   .create-task-btn-mobile {
     display: block;
     position: fixed;
-    bottom: 12%;
+    bottom: 7%;
     right: 8px;
-    background-color: rgba(216, 168, 62, 1);
+    background-color: rgba(216, 168, 62, 0.9);
     color: #474747;
     border-radius: 50px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s all ease-in-out;
     cursor: pointer;
     padding: 6px 8px 2px 8px; 
-    font-size: 20px;
-    z-index: 1;
+    font-size: 25px;
+    z-index: 2;
     font-family: "Manrope", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
@@ -1459,6 +1459,9 @@ footer span {
   .share-buttons-mobile {
     display: none;
   }
+  .create-task-btn-mobile {
+    display: none;
+  }
 }
 
 .notification-container {
@@ -1481,6 +1484,7 @@ footer span {
   font-variation-settings: "wdth" 100;
   font-size: 18px;
   border: none;
+  z-index: 1;
 }
 
 @keyframes slide-up {
@@ -1510,7 +1514,7 @@ footer span {
     width: 100%;
     font-size: 18px;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 8px;
     right: 0;
     bottom: 0;
     border: none;
