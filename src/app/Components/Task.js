@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { formatDateToInput, formatDateToOriginalFormat } from './DateUtil'
-import GridView from './active/GridView'
-import ListView from './active/ListView'
+const GridView = lazy(() => import('./active/GridView'))
+const ListView = lazy(() => import('./active/ListView'))
 
 export default function Task({ views, tasks, markTask, deleteTask, editTask }) {
   const [editingTasks, setEditingTasks] = useState({});
   const [taskChanges, setTaskChanges] = useState({});
   const [status, setStatus] = useState(null);
   const [dueDate, setDueDate] = useState(null);
-  const [dateError, setDateError] = useState(null);
-  const [taskError, setTaskError] = useState(null);
+  const [dateError, setDateError] = useState({ id: '', error: ''});
+  const [taskError, setTaskError] = useState({ id: '', error: ''});
   const [fadeIn, setFadeIn] = useState(false);
   const todayDateString = new Date().toDateString();
   const filteredTasks = tasks.filter((task) => new Date(task.dueDate) >= new Date(todayDateString));
@@ -53,12 +53,12 @@ export default function Task({ views, tasks, markTask, deleteTask, editTask }) {
   };
 
   const stopEditing = (id) => {
-    setEditingTasks((prevEditingTasks) => ({
-      ...prevEditingTasks,
+    setEditingTasks({
+      ...editingTasks,
       [id]: false,
-    }));
-    setTaskError(null);
-    setDateError(null);
+    });
+    setTaskError({ id: '', error: ''});
+    setDateError({ id: '', error: ''});
   };
 
   const handleEditFormSubmit = (e, id) => {
@@ -67,18 +67,32 @@ export default function Task({ views, tasks, markTask, deleteTask, editTask }) {
     const dueDateObj = new Date(formattedDueDate);
 
     if (taskChanges[id].length === 0) {
-      setTaskError('Task cannot be empty!');
+      setTaskError({
+        ...taskError,
+        id: id,
+        error: 'Task cannot be empty!',
+      });
     } else if (taskChanges[id].length < 6) {
-      setTaskError('Task must be at least 6 characters long!');
+      setTaskError({
+        ...taskError,
+        id: id,
+        error: 'Task must be at least 6 characters long!',
+      });
     } else if (taskChanges[id].length > 125) {
-      setTaskError('Task must be at most 125 characters long!');
+      setTaskError({
+        ...taskError,
+        id: id,
+        error: 'Task must be at most 125 characters long!',
+      });
     } else if (dueDateObj < new Date(new Date().setHours(0, 0, 0, 0))) {
-        setDateError('Due date cannot be in the past!');
+      setDateError({
+        ...dateError,
+        id: id,
+        error: 'Due date cannot be in the past!',
+      });
     } else {
       editTask(id, taskChanges[id], formattedDueDate, status);
       stopEditing(id);
-      setTaskError(null);
-      setDateError(null);
     }
   };
 
@@ -92,46 +106,51 @@ export default function Task({ views, tasks, markTask, deleteTask, editTask }) {
   }, []);
 
   return (
-    filteredTasks.length !== 0 ? (
-      views === 0 ? (
-        <GridView
-          filteredTasks={filteredTasks}
-          markTask={markTask}
-          deleteTask={deleteTask}
-          startEditing={startEditing}
-          editingTasks={editingTasks}
-          taskChanges={taskChanges}
-          dueDate={dueDate}
-          dateError={dateError}
-          taskError={taskError}
-          handleEditFormSubmit={handleEditFormSubmit}
-          stopEditing={stopEditing}
-          handleDueDateChange={handleDueDateChange}
-          handleTaskChanges={handleTaskChanges}
-          setStatus={setStatus}
-        />
+    <Suspense fallback={<div 
+      className="text-light font-manrope text-center" 
+      style={{ fontSize: '25px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        Loading...</div>}>
+      {filteredTasks.length !== 0 ? (
+        views === 0 ? (
+          <GridView
+            filteredTasks={filteredTasks}
+            markTask={markTask}
+            deleteTask={deleteTask}
+            startEditing={startEditing}
+            editingTasks={editingTasks}
+            taskChanges={taskChanges}
+            dueDate={dueDate}
+            dateError={dateError}
+            taskError={taskError}
+            handleEditFormSubmit={handleEditFormSubmit}
+            stopEditing={stopEditing}
+            handleDueDateChange={handleDueDateChange}
+            handleTaskChanges={handleTaskChanges}
+            setStatus={setStatus}
+          />
+        ) : (
+          <ListView
+            filteredTasks={filteredTasks}
+            markTask={markTask}
+            deleteTask={deleteTask}
+            startEditing={startEditing}
+            editingTasks={editingTasks}
+            taskChanges={taskChanges}
+            dueDate={dueDate}
+            dateError={dateError}
+            taskError={taskError}
+            handleEditFormSubmit={handleEditFormSubmit}
+            stopEditing={stopEditing}
+            handleDueDateChange={handleDueDateChange}
+            handleTaskChanges={handleTaskChanges}
+            setStatus={setStatus}
+          />
+        )
       ) : (
-        <ListView
-          filteredTasks={filteredTasks}
-          markTask={markTask}
-          deleteTask={deleteTask}
-          startEditing={startEditing}
-          editingTasks={editingTasks}
-          taskChanges={taskChanges}
-          dueDate={dueDate}
-          dateError={dateError}
-          taskError={taskError}
-          handleEditFormSubmit={handleEditFormSubmit}
-          stopEditing={stopEditing}
-          handleDueDateChange={handleDueDateChange}
-          handleTaskChanges={handleTaskChanges}
-          setStatus={setStatus}
-        />
-      )
-    ) : (
-      <div className={`fade-effect ${fadeIn ? 'fade-in' : ''}`}>
-        <h3 className="text-light font-manrope">Your tasks will show up here.</h3>
-      </div>
-    )
+        <div className={`fade-effect ${fadeIn ? 'fade-in' : ''}`}>
+          <h3 className="text-light font-manrope">Your tasks will show up here.</h3>
+        </div>
+      )}
+    </Suspense>
   );
 }

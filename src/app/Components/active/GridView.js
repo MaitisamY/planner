@@ -43,24 +43,28 @@ export default function GridView({
                   id={`task-${task.id}`}
                   value={taskChanges[task.id]}
                   type="text"
-                  rows="4"
+                  rows="6"
                   onChange={(e) => handleTaskChanges(e, task.id)}
                   placeholder="Edit your task here"
                   autoFocus
                 ></textarea>
-                {taskError && <h6 className="error">{taskError}</h6>}
+                {taskError.id === task.id && <h6 className="error">{taskError.error}</h6>}
                 <h3>Edit due date</h3>
                 <input type="date" value={dueDate} onChange={handleDueDateChange} />
-                {dateError && <h6 className="error">{dateError}</h6>}
+                {dateError.id === task.id && <h6 className="error">{dateError.error}</h6>}
                 <p className="text-center">Modifying on: {new Date().toDateString()}</p>
                 <div className="task-btns">
-                  <button title="Update" className="task-common-btn" type="submit">
+                  <button 
+                    title="Update" 
+                    className="task-common-btn common-btn-theme" 
+                    type="submit"
+                  >
                     <BsCheckAll />
                   </button>
                   <button
                     onClick={() => stopEditing(task.id)}
                     title="Cancel editing"
-                    className="task-common-btn"
+                    className="task-common-btn common-btn-theme"
                   >
                     <BsX />
                   </button>
@@ -85,7 +89,7 @@ export default function GridView({
                         ? 'Mark as pending'
                         : 'Mark as completed'
                     }
-                    className="task-common-btn"
+                    className="task-common-btn common-btn-theme"
                   >
                     {task.status === 'completed' ? (
                       <MdCheckBoxOutlineBlank />
@@ -96,14 +100,14 @@ export default function GridView({
                   <button
                     onClick={() => (setStatus(task.status), startEditing(task.id))}
                     title="Edit"
-                    className="task-common-btn"
+                    className="task-common-btn edit-btn-theme"
                   >
                     <BsPencil />
                   </button>
                   <button
                     title="Delete"
                     onClick={() => deleteTask(task.id)}
-                    className="task-common-btn"
+                    className="task-common-btn delete-btn-theme"
                   >
                     <BsTrash />
                   </button>

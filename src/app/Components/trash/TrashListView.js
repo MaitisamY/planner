@@ -46,22 +46,26 @@ export default function TrashListView({
                   placeholder="Edit your task here"
                   autoFocus
                 ></textarea>
-                {taskError && <h6 className="error">{taskError}</h6>}
+                {taskError.id === task.id && <h6 className="error">{taskError.error}</h6>}
                 <h3>Set due date</h3>
                 <div className="edit-task-row-2">
                   <input type="date" value={dueDate} onChange={handleDueDateChange} />
-                  <button title="Re create" className="task-common-btn" type="submit">
+                  <button 
+                    title="Re create" 
+                    className="task-common-btn common-btn-theme" 
+                    type="submit"
+                  >
                     <BsRepeat />
                   </button>
                   <button
                     onClick={() => stopEditing(task.id)}
                     title="Cancel editing"
-                    className="task-common-btn"
+                    className="task-common-btn common-btn-theme"
                   >
                     <BsX />
                   </button>
                 </div>
-                {dateError && <h6 className="error">{dateError}</h6>}
+                {dateError.id === task.id && <h6 className="error">{dateError.error}</h6>}
               </form>
             ) : (
               <>
@@ -79,14 +83,14 @@ export default function TrashListView({
                   <button
                     onClick={() => (setStatus(task.status), startEditing(task.id))}
                     title="Edit"
-                    className="task-common-btn"
+                    className="task-common-btn edit-btn-theme"
                   >
                     <BsPencil />
                   </button>
                   <button
                     title="Delete"
                     onClick={() => deleteTask(task.id)}
-                    className="task-common-btn"
+                    className="task-common-btn delete-btn-theme"
                   >
                     <BsTrash />
                   </button>

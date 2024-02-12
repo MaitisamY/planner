@@ -3,7 +3,9 @@ import {
   BsTrash, 
   BsPencil, 
   BsX, 
-  BsCheckAll
+  BsCheckAll,
+  BsToggleOn,
+  BsToggleOff
 } from 'react-icons/bs'
 export default function ListView({ 
   filteredTasks, 
@@ -47,58 +49,69 @@ export default function ListView({
                     placeholder="Edit your task here"
                     autoFocus
                   ></textarea>
-                  {taskError && <h6 className="error">{taskError}</h6>}
+                  {taskError.id === task.id && <h6 className="error">{taskError.error}</h6>}
                   <h3>Edit due date</h3>
                   <div className="edit-task-row-2">
                     <input type="date" value={dueDate} onChange={handleDueDateChange} />
-                    
-                      <button title="Update" className="task-common-btn" type="submit">
+
+                      <button 
+                        title="Update" 
+                        className="task-common-btn common-btn-theme" 
+                        type="submit"
+                      >
                         <BsCheckAll />
                       </button>
                       <button
                         onClick={() => stopEditing(task.id)}
                         title="Cancel editing"
-                        className="task-common-btn"
+                        className="task-common-btn common-btn-theme"
                       >
                         <BsX />
                       </button>
                     
                   </div>
-                  {dateError && <h6 className="error">{dateError}</h6>}
+                  {dateError.id === task.id && <h6 className="error">{dateError.error}</h6>}
                 </form>
               ) : (
                 <>
                   <h2 className={task.status === 'completed' ? 'line-through' : ''}>
-                    <input
+                    {/* <input
                       title={task.status === 'completed' ? 'Mark as pending' : 'Mark as completed'}
                       type="checkbox"
                       checked={task.status === 'completed'}
                       onChange={() => markTask(task.id)}
-                    />
-                    {' ' + task.task}
+                    /> */}
+                    <span onClick={() => markTask(task.id)}>
+                      {task.status === 'completed' ? <BsToggleOn size={25} /> : <BsToggleOff size={25} />}
+                    </span>
+                    <i>{' ' + task.task}</i>
                   </h2>
                   <div className="task-btns">
-                    <p>
-                      {task.updatedDate
-                        ? `Updated on: ${task.updatedDate}`
-                        : `Created on: ${task.date}`}
-                    </p> 
-                    <p id="pipe"> | </p> 
-                    <p>Due on: {task.dueDate}</p>
-                    <button
-                      onClick={() => (setStatus(task.status), startEditing(task.id))}
-                      title="Edit"
-                      className="task-common-btn"
-                    >
-                      <BsPencil />
-                    </button>
-                    <button
-                      title="Delete"
-                      onClick={() => deleteTask(task.id)}
-                      className="task-common-btn"
-                    >
-                      <BsTrash />
-                    </button>
+                    <div>
+                      <p>
+                        {task.updatedDate
+                          ? `Updated on: ${task.updatedDate}`
+                          : `Created on: ${task.date}`}
+                      </p> 
+                      {/* <p id="pipe"> | </p>  */}
+                      <p>Due on: {task.dueDate}</p>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px' }}>
+                      <button
+                        onClick={() => (setStatus(task.status), startEditing(task.id))}
+                        title="Edit"
+                        className="task-common-btn edit-btn-theme"
+                      >
+                        <BsPencil />
+                      </button>
+                      <button
+                        title="Delete"
+                        onClick={() => deleteTask(task.id)}
+                        className="task-common-btn delete-btn-theme"
+                      >
+                        <BsTrash />
+                      </button>
+                    </div>
                   </div>
                 </>
               )}  
