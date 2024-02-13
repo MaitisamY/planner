@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         <meta name="keywords" content={metadata.keywords} />
         <meta name="author" content={metadata.author} />
         {/* <link rel="icon" type="image/icon" href="/planner-icon.png" sizes="any" /> */}
-        <link rel="icon" type="image/icon" href="/planner-icon-white.png" sizes="any" />
+        <link rel="icon" type="image/icon" href="/planner-favicon.png" sizes="any" />
       </head>
       <body suppressHydrationWarning={true}>{children}</body>
     </html>

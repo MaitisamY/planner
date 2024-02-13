@@ -5,7 +5,6 @@ import Main from './Components/Main'
 import Popup from './Components/Popup'
 import Feature from './Components/Feature'
 import { useToDoFunctions } from './useToDoFunctions'
-import { motion } from 'framer-motion'
 import './globals.css'
 import {
   FacebookShareButton,
