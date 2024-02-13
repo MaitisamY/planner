@@ -2,7 +2,9 @@ import './globals.css'
 
 export const metadata = {
   title: 'PLANNER',
-  description: 'A simple daily tasks maintainer app with task and its date creation, edition, mark or unmark as completed or pending and deletion features.',
+  description: `Planner is a simple daily tasks maintainer app built on Next.js framework, 
+  designed to assist users in managing their tasks efficiently. It provides essential features such as task creation, editing, 
+  marking as completed or pending, and deletion. The app utilizes local storage to persist tasks and related functionalities.`,
   author: 'Aitisam Yaseen',
 }
 
