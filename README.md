@@ -64,19 +64,19 @@ Check out the live version of the project [here](https://next-to-do-app-nu.verce
 ## Some Screenshots
 
 ### Home View on landing
-![34567](/assets/145204832/9600fdf5-526d-49d9-bf79-1bd24bf1b128 "Home View on landing")
+![34567](https://github.com/MaitisamY/planner/assets/145204832/9600fdf5-526d-49d9-bf79-1bd24bf1b128 "Home View on landing")
 
 ### Home Grid View
-![12345](/assets/145204832/66567d75-3aa5-489b-b9dc-bffaef310d21 "Home Grid View")
+![12345](https://github.com/MaitisamY/planner/assets/145204832/66567d75-3aa5-489b-b9dc-bffaef310d21 "Home Grid View")
 
 ### Home List View
-![23456](/assets/145204832/7abf57c2-6f49-494e-9f6f-8cfb90767075 "Home List View")
+![23456](https://github.com/MaitisamY/planner/assets/145204832/7abf57c2-6f49-494e-9f6f-8cfb90767075 "Home List View")
 
 ### Mobile designs
-![45678](/assets/145204832/51562480-980b-4c07-9ece-c97f7b475f9f "Mobile designs 1")
-![56789](/assets/145204832/a661788d-16d2-4923-9e44-be4afe40d3fc "Mobile designs 2")
-![67890](/assets/145204832/3b3bee41-4d4e-4bbe-8ecc-b40f70108eac "Mobile designs 3")
-![78901](/assets/145204832/69bcc856-ac01-4aaa-bdb7-2a700358b290 "Mobile designs 4")
+![45678](https://github.com/MaitisamY/planner/assets/145204832/51562480-980b-4c07-9ece-c97f7b475f9f "Mobile designs 1")
+![56789](https://github.com/MaitisamY/planner/assets/145204832/a661788d-16d2-4923-9e44-be4afe40d3fc "Mobile designs 2")
+![67890](https://github.com/MaitisamY/planner/assets/145204832/3b3bee41-4d4e-4bbe-8ecc-b40f70108eac "Mobile designs 3")
+![78901](https://github.com/MaitisamY/planner/assets/145204832/69bcc856-ac01-4aaa-bdb7-2a700358b290 "Mobile designs 4")
 
 ## Support
 For any inquiries or support requests, please reach out to the development team through our GitHub repository.
