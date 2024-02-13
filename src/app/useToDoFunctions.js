@@ -2,6 +2,23 @@ import { useState, useEffect } from 'react';
 
 export const useToDoFunctions = () => {
     const [tasks, setTasks] = useState([]);
+    const [toDo, setToDo] = useState({
+      text: {
+        id: 1,
+        task: '',
+        date: '',
+        updatedDate: '',
+        dueDate: '',
+        status: '',
+      },
+      checklist: {
+        tasks: {
+          id: 1,
+          item: '',
+          status: '',
+        },
+      },
+    });
     const [popup, setPopup] = useState(false);
     const [features, setFeatures] = useState(false);
     const [notifications, setNotifications] = useState([]);
@@ -18,6 +35,40 @@ export const useToDoFunctions = () => {
       return `task_${timestamp}`;
     };
 
+    const createChecklistItem = (item) => {
+      const newTasks = toDo.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            checklist: {
+              ...task.checklist,
+              tasks: [...task.checklist.tasks, { id: generateTaskId(), item: '', status: '' }],
+            },
+          };
+        }
+        return task;
+      });
+      setToDo(newTasks);
+      localStorage.setItem('toDo', JSON.stringify(newTasks));
+    }
+
+    const removeChecklistItem = (id) => {
+      const newTasks = toDo.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            checklist: {
+              ...task.checklist,
+              tasks: task.checklist.tasks.filter((item) => item.id !== id),
+            },
+          };
+        }
+        return task;
+      });
+      setToDo(newTasks);
+      localStorage.setItem('toDo', JSON.stringify(newTasks));
+    }
+
     const handleViews = (id) => {
       setViews(id);
     }
@@ -31,6 +82,7 @@ export const useToDoFunctions = () => {
       });
       // Show success message
       addNotification('Task added successfully!');
+      console.log(newTask);
     };
   
     const markTask = (id) => {
@@ -95,13 +147,13 @@ export const useToDoFunctions = () => {
         setTasks(JSON.parse(storedTasks));
       }
     
-      // Hiding the notification after 3 seconds when notification state changes
+      // Hiding the notification after 5 seconds when notification state changes
       const timeout = setTimeout(() => {
         setNotifications((prevNotifications) => prevNotifications.slice(1));
       }, 5000); 
     
       return () => clearTimeout(timeout);
-    }, [notifications]);  
+    }, [notifications]); 
 
     return {
       tasks,

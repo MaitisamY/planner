@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
+import { useState, useEffect } from 'react'
 import Main from './Components/Main'
 import Popup from './Components/Popup'
 import Feature from './Components/Feature'
 import { useToDoFunctions } from './useToDoFunctions'
+import { motion } from 'framer-motion'
 import './globals.css'
 import {
   FacebookShareButton,
@@ -88,7 +91,9 @@ export default function Home() {
             >
                 <BsPlusLg />
             </a>
-            {notifications.length > 0 && ( <div className="notification-container">{notifications}</div> )}
+            {notifications.length > 0 && (
+              <div className="notification-container">{notifications}</div>
+            )}
             <div className="if-size-less-than-300">
                 <p>Sorry! We do not support mobile devices less than 300 pixels wide.</p>
             </div>

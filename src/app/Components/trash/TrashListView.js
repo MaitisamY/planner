@@ -49,21 +49,25 @@ export default function TrashListView({
                 {taskError.id === task.id && <h6 className="error">{taskError.error}</h6>}
                 <h3>Set due date</h3>
                 <div className="edit-task-row-2">
-                  <input type="date" value={dueDate} onChange={handleDueDateChange} />
-                  <button 
-                    title="Re create" 
-                    className="task-common-btn common-btn-theme" 
-                    type="submit"
-                  >
-                    <BsRepeat />
-                  </button>
-                  <button
-                    onClick={() => stopEditing(task.id)}
-                    title="Cancel editing"
-                    className="task-common-btn common-btn-theme"
-                  >
-                    <BsX />
-                  </button>
+                  <div>
+                    <input type="date" value={dueDate} onChange={handleDueDateChange} />
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px' }}>
+                    <button 
+                      title="Re create" 
+                      className="task-common-btn common-btn-theme" 
+                      type="submit"
+                    >
+                      <BsRepeat />
+                    </button>
+                    <button
+                      onClick={() => stopEditing(task.id)}
+                      title="Cancel editing"
+                      className="task-common-btn common-btn-theme"
+                    >
+                      <BsX />
+                    </button>
+                  </div>  
                 </div>
                 {dateError.id === task.id && <h6 className="error">{dateError.error}</h6>}
               </form>
@@ -73,27 +77,31 @@ export default function TrashListView({
                   {' ' + task.task}
                 </h2>
                 <div className="task-btns">
-                  <p>
-                    {task.updatedDate
-                      ? `Updated on: ${task.updatedDate}`
-                      : `Created on: ${task.date}`}
-                  </p>
-                  <p id="pipe"> | </p>
-                  <p>Due on: {task.dueDate}</p>
-                  <button
-                    onClick={() => (setStatus(task.status), startEditing(task.id))}
-                    title="Edit"
-                    className="task-common-btn edit-btn-theme"
-                  >
-                    <BsPencil />
-                  </button>
-                  <button
-                    title="Delete"
-                    onClick={() => deleteTask(task.id)}
-                    className="task-common-btn delete-btn-theme"
-                  >
-                    <BsTrash />
-                  </button>
+                  <div>
+                    <p>
+                      {task.updatedDate
+                        ? `Updated on: ${task.updatedDate}`
+                        : `Created on: ${task.date}`}
+                    </p>
+                    {/* <p id="pipe"> | </p> */}
+                    <p>Due on: {task.dueDate}</p>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px' }}>
+                    <button
+                      onClick={() => (setStatus(task.status), startEditing(task.id))}
+                      title="Edit"
+                      className="task-common-btn edit-btn-theme"
+                    >
+                      <BsPencil />
+                    </button>
+                    <button
+                      title="Delete"
+                      onClick={() => deleteTask(task.id)}
+                      className="task-common-btn delete-btn-theme"
+                    >
+                      <BsTrash />
+                    </button>
+                  </div>
                 </div>
               </>
             )}

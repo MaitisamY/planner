@@ -148,7 +148,7 @@ header img {
     font-size: 18px;
     padding: 10px 0 10px 0;
     /* border-bottom: 1px solid rgba(255, 188, 45, 0.1); */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.75);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   header img {
     padding: 0;
@@ -249,7 +249,7 @@ footer {
   font-size: 16px;
   text-transform: uppercase;
   /* border-top: 1px solid rgba(255, 188, 45, 0.1); */
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 
 }
 
@@ -280,7 +280,7 @@ footer span {
 
 @media screen and (max-width: 992px) {
   footer {
-    padding: 10px 0 10px 0;
+    padding: 30px 0 10px 0;
     font-size: 15px;
   }
 }
@@ -297,7 +297,7 @@ footer span {
   justify-content: flex-start;
   align-items: center;
   /* border-right: 1px solid rgba(255, 188, 45, 0.1); */
-  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .welcome-holder-header {
@@ -364,7 +364,7 @@ footer span {
   flex-wrap: wrap;
   text-align: center;
   gap: 20px;
-  padding: 0 20px 0 0;
+  padding: 0 20px 0 20px;
 }
 
 .task-holder-header-nav {
@@ -376,7 +376,7 @@ footer span {
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
-  padding: 0 20px 0 20px;
+  padding: 0;
 }
 
 .task-holder-header-view {
@@ -388,7 +388,7 @@ footer span {
   justify-content: flex-end;
   align-items: center;
   gap: 20px;
-  padding: 0 20px 0 0;
+  padding: 0 30px 0 0;
 }
 
 .task-holder-header-view button {
@@ -502,7 +502,7 @@ footer span {
     padding: 0;
   }
   .task-holder-header-nav {
-    width: auto;
+    width: 100%;
     justify-content: center;
     align-items: center;
     padding: 0;
@@ -510,7 +510,7 @@ footer span {
   }
   
   .task-holder-header-view {
-    width: auto;
+    width: 100%;
     justify-content: center;
     align-items: center;
     padding: 0;
@@ -576,7 +576,6 @@ footer span {
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1), 0 2px 6px 0 rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  color: #303030;
   margin-top: 10px;
 }
 
@@ -1078,7 +1077,7 @@ footer span {
 }
 
 .list-view .edit-btn-theme {
-  background-color: rgba(40, 57, 214, 0.75);
+  background-color: rgba(40, 57, 214, 0.85);
   color: #f8f9fa;
 }
 
@@ -1087,7 +1086,7 @@ footer span {
 }
 
 .list-view .delete-btn-theme {
-  background-color: rgba(196, 22, 22, 0.75);
+  background-color: rgba(196, 22, 22, 0.85);
   color: #f8f9fa;
 }
 
@@ -1118,9 +1117,8 @@ footer span {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   gap: 10px;
   padding: 0;
 }
@@ -1288,7 +1286,7 @@ footer span {
 }
 
 .grid-view .edit-btn-theme {
-  background-color: rgba(40, 57, 214, 0.75);
+  background-color: rgba(40, 57, 214, 0.85);
   color: #f8f9fa;
 }
 
@@ -1297,7 +1295,7 @@ footer span {
 }
 
 .grid-view .delete-btn-theme {
-  background-color: rgba(196, 22, 22, 0.75);
+  background-color: rgba(196, 22, 22, 0.85);
   color: #f8f9fa;
 }
 
@@ -1620,16 +1618,22 @@ footer span {
   color: #f8f9fa;
   padding: 16px;
   border-radius: 10px;
-  animation: slide-up 0.5s ease-out;
   text-align: center;
   font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   font-variation-settings: "wdth" 100;
-  font-size: 18px;
+  font-size: 16px;
   border: none;
   z-index: 1;
+  animation: slide-up 0.5s ease-out; 
+  transform: translateY(0);
+  transition: bottom 0.5s ease; 
+}
+
+.notification-container.visible {
+  bottom: 20px; /* Position at desired location */
 }
 
 @keyframes slide-up {

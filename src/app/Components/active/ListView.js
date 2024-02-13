@@ -52,8 +52,10 @@ export default function ListView({
                   {taskError.id === task.id && <h6 className="error">{taskError.error}</h6>}
                   <h3>Edit due date</h3>
                   <div className="edit-task-row-2">
+                    <div>
                     <input type="date" value={dueDate} onChange={handleDueDateChange} />
-
+                    </div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px' }}>
                       <button 
                         title="Update" 
                         className="task-common-btn common-btn-theme" 
@@ -68,7 +70,7 @@ export default function ListView({
                       >
                         <BsX />
                       </button>
-                    
+                    </div>
                   </div>
                   {dateError.id === task.id && <h6 className="error">{dateError.error}</h6>}
                 </form>
@@ -81,7 +83,10 @@ export default function ListView({
                       checked={task.status === 'completed'}
                       onChange={() => markTask(task.id)}
                     /> */}
-                    <span onClick={() => markTask(task.id)}>
+                    <span 
+                      onClick={() => markTask(task.id)}
+                      title={task.status === 'completed' ? 'Mark as pending' : 'Mark as completed'}
+                    >
                       {task.status === 'completed' ? <BsToggleOn size={25} /> : <BsToggleOff size={25} />}
                     </span>
                     <i>{' ' + task.task}</i>
