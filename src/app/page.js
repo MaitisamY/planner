@@ -21,12 +21,14 @@ import { BsShare, BsPlusLg } from 'react-icons/bs'
 export default function Home() {
     const {
       tasks,
+      toDo,
       popup,
       features,
       notifications,
       views,
       shareUrl,
       shareMessage,
+      handleChange,
       setPopup,
       setFeatures,
       handleViews,
@@ -36,7 +38,9 @@ export default function Home() {
       editTask,
       reCreateTask,
       handleOutsidePopupClick,
-      handleOutsideFeatureClick
+      handleOutsideFeatureClick,
+      createChecklistItem,
+      removeChecklistItem
     } = useToDoFunctions();
 
     // localStorage.removeItem('tasks');
@@ -44,6 +48,10 @@ export default function Home() {
         <>
             {popup && (
                 <Popup 
+                    toDo={toDo}
+                    createChecklistItem={createChecklistItem}
+                    removeChecklistItem={removeChecklistItem}
+                    handleChange={handleChange}
                     closePopup={() => setPopup(false)} 
                     addTask={addTask} 
                     handleOutsidePopupClick={handleOutsidePopupClick} 

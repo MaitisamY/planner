@@ -1,73 +1,77 @@
 import { useState, useEffect } from 'react';
 
 export const useToDoFunctions = () => {
+    const generateTaskId = () => {
+      const timestamp = new Date().getTime();
+      return `task_${timestamp}`;
+    };
+
     const [tasks, setTasks] = useState([]);
     const [toDo, setToDo] = useState({
-      text: {
-        id: 1,
-        task: '',
-        date: '',
-        updatedDate: '',
-        dueDate: '',
-        status: '',
-      },
-      checklist: {
-        tasks: {
-          id: 1,
-          item: '',
-          status: '',
-        },
-      },
+      id: generateTaskId(),
+      type: 'text', // Default type is text
+      task: '', // Task text
+      date: '', // Date information
+      updatedDate: '', // Updated date information
+      dueDate: '', // Due date information
+      status: '', // Status information
+      checklist: [], // Array to hold checklist items
     });
     const [popup, setPopup] = useState(false);
     const [features, setFeatures] = useState(false);
     const [notifications, setNotifications] = useState([]);
     const [views, setViews] = useState(0);
     const shareUrl = 'https://next-to-do-app-nu.vercel.app/';
-    const shareMessage = `I use this app to maintain my daily tasks. Check out the app At:`;
+    const shareMessage = `I PLANNER application to maintain my daily tasks, checklists and notes. Check out the PLANNER at:`;
 
     const addNotification = (message) => {
       setNotifications([message]);
     };
-    
-    const generateTaskId = () => {
-      const timestamp = new Date().getTime();
-      return `task_${timestamp}`;
+
+    const handleChange = (itemId, value, fieldName) => {
+      if (fieldName === 'text') {
+          setToDo(prevToDo => ({
+              ...prevToDo,
+              task: value
+          }));
+      } else if (fieldName === 'dueDate') {
+          setToDo(prevToDo => ({
+              ...prevToDo,
+              dueDate: value
+          }));
+      } else {
+          const updatedChecklist = toDo.checklist.map(item => {
+              if (item.id === itemId) {
+                  return { ...item, item: value };
+              }
+              return item;
+          });
+  
+          setToDo(prevToDo => ({
+              ...prevToDo,
+              checklist: updatedChecklist
+          }));
+      }
     };
 
-    const createChecklistItem = (item) => {
-      const newTasks = toDo.map((task) => {
-        if (task.id === id) {
-          return {
-            ...task,
-            checklist: {
-              ...task.checklist,
-              tasks: [...task.checklist.tasks, { id: generateTaskId(), item: '', status: '' }],
-            },
-          };
-        }
-        return task;
-      });
-      setToDo(newTasks);
-      localStorage.setItem('toDo', JSON.stringify(newTasks));
-    }
-
-    const removeChecklistItem = (id) => {
-      const newTasks = toDo.map((task) => {
-        if (task.id === id) {
-          return {
-            ...task,
-            checklist: {
-              ...task.checklist,
-              tasks: task.checklist.tasks.filter((item) => item.id !== id),
-            },
-          };
-        }
-        return task;
-      });
-      setToDo(newTasks);
-      localStorage.setItem('toDo', JSON.stringify(newTasks));
-    }
+    const createChecklistItem = () => {
+      setToDo(prevToDo => ({
+          ...prevToDo,
+          type: 'checklist', // Change type to checklist
+          checklist: [
+              ...prevToDo.checklist,
+              { id: generateTaskId(), item: '', status: '' } // Add a new checklist item
+          ]
+      }));
+    };
+    
+    // Function to remove a checklist item by id
+    const removeChecklistItem = (itemId) => {
+        setToDo(prevToDo => ({
+            ...prevToDo,
+            checklist: prevToDo.checklist.filter(item => item.id !== itemId) // Remove the checklist item with the specified id
+        }));
+    };
 
     const handleViews = (id) => {
       setViews(id);
@@ -146,6 +150,10 @@ export const useToDoFunctions = () => {
       if (storedTasks) {
         setTasks(JSON.parse(storedTasks));
       }
+      // const storedToDo = localStorage.getItem('toDo');
+      // if (storedToDo) {
+      //   setTasks(JSON.parse(storedToDo));
+      // }
     
       // Hiding the notification after 5 seconds when notification state changes
       const timeout = setTimeout(() => {
@@ -157,12 +165,14 @@ export const useToDoFunctions = () => {
 
     return {
       tasks,
+      toDo,
       popup,
       features,
       notifications,
       views,
       shareUrl,
       shareMessage,
+      handleChange,
       setPopup,
       setFeatures,
       handleViews,
@@ -172,6 +182,8 @@ export const useToDoFunctions = () => {
       editTask,
       reCreateTask,
       handleOutsidePopupClick,
-      handleOutsideFeatureClick
+      handleOutsideFeatureClick,
+      createChecklistItem,
+      removeChecklistItem
     };
 };

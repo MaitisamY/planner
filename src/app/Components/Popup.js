@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react'
 import { formatDateToInput } from './DateUtil';
-export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) {
+import { BsXLg, BsArrowLeft, BsDash, BsPlus } from 'react-icons/bs'
+export default function Popup({ 
+    addTask, 
+    closePopup, 
+    handleOutsidePopupClick, 
+    toDo, 
+    createChecklistItem, 
+    removeChecklistItem,
+    handleChange
+}) {
     const [newTask, setNewTask] = useState('');
     const [inputError, setInputError] = useState(null);
     const [dateError, setDateError] = useState(null);
     const [selectedDate, setSelectedDate] = useState(formatDateToInput(new Date().toDateString()));
     const todayDateString = new Date().toDateString();
+    const [textOrChecklist, setTextOrChecklist] = useState(null);
 
-    const handleNewTaskChange = (event) => {
-        setNewTask(event.target.value);
-    }
-    const handleDateChange = (event) => {
-        setSelectedDate(event.target.value);
+    const handleTaskOrChecklistChange = (name) => {
+        setTextOrChecklist(name);
     }
     
     const handleFormSubmit = (e) => {
@@ -44,31 +51,89 @@ export default function Popup({ addTask, closePopup, handleOutsidePopupClick }) 
     return (
         <div id="popup" className="popup" onClick={(e) => handleOutsidePopupClick(e)}>
             <div id="add-task" className="add-task">
-                <a onClick={closePopup} className="close">&times;</a>
+                <a onClick={closePopup} className="close"><BsXLg /></a>
                 <h2>Add New Task</h2>
                 <form onSubmit={handleFormSubmit}>
-                    <textarea 
-                        type="text" 
-                        placeholder="Write your task here" 
-                        rows="5" 
-                        defaultValue={newTask} 
-                        onChange={handleNewTaskChange} 
-                        spellCheck="false" 
-                        autoComplete="off"
-                        autoFocus
-                    >
-                    </textarea>
-                    <h6>
-                        <span>(<i className={newTask.length < 6 ? 'danger' : newTask.length > 125 ? 'danger' : ''}>
-                        {newTask.length}</i>/125)</span> 
-                        {inputError && inputError}
-                    </h6>
-                    <p>
-                        Select date <input type="date" value={selectedDate} onChange={handleDateChange} required />
-                    </p>
-                    {dateError && <h6 className="error">{dateError}</h6>}
-                    <h5>Default date: {todayDateString}</h5>
-                    <button type="submit">Add</button>
+                {
+                    textOrChecklist === 'text' ? (
+                        <>
+                            <a onClick={() => handleTaskOrChecklistChange(null)} className="back"><BsArrowLeft /></a>
+                            <textarea 
+                                type="text" 
+                                placeholder="Write your task here" 
+                                rows="5" 
+                                defaultValue={newTask} 
+                                onChange={(e) => handleChange(null, e.target.value, 'text')} 
+                                spellCheck="false" 
+                                autoComplete="off"
+                                autoFocus
+                            >
+                            </textarea>
+                            <h6>
+                                <span>(<i className={newTask.length < 6 ? 'danger' : newTask.length > 125 ? 'danger' : ''}>
+                                {newTask.length}</i>/125)</span> 
+                                {inputError && inputError}
+                            </h6>
+                            <p>
+                                Select date 
+                                <input 
+                                    type="date" 
+                                    value={selectedDate} 
+                                    onChange={(e) => handleChange(null, 
+                                    e.target.value, 'dueDate')} 
+                                    required 
+                                />
+                            </p>
+                            {dateError && <h6 className="error">{dateError}</h6>}
+                            <h5>Default date: {todayDateString}</h5>
+                            <button type="submit">Create</button>
+                        </>
+                    ) : textOrChecklist === 'checklist' ? (
+                        <>
+                            <a onClick={() => handleTaskOrChecklistChange(null)} className="back"><BsArrowLeft /></a>
+                            <ul style={{ 
+                                display: 'flex', 
+                                alignItems: 'flex-start', 
+                                justifyContent: 'center', 
+                                flexDirection: 'column', 
+                                gap: '20px',
+                                listStyleType: 'initial'
+                            }}>
+                                {toDo.type === 'checklist' && toDo.checklist.length > 0 ? ( // Check if checklist is not empty
+                                    toDo.checklist.map((item, index) => (
+                                        <li key={item.id}>
+                                            <input 
+                                                name='checklist' 
+                                                type="text" 
+                                                id={item.id} 
+                                                value={item.item} 
+                                                onChange={(e) => handleChange(item.id, e.target.value, 'checklist')} 
+                                                placeholder={`Checklist item ${index + 1}`}
+                                            />
+                                            {(index + 1) !== 1 &&  (
+                                                <a 
+                                                    style={{ marginLeft: '10px', cursor: 'pointer', fontSize: '12px' }}
+                                                    onClick={() => removeChecklistItem(item.id)}
+                                                >
+                                                    Remove
+                                                </a>
+                                            )}
+                                        </li>
+                                    ))
+                                ) : (
+                                    `Use the button below to add checklist items` // Render a message if checklist is empty
+                                )}
+                                <a className="add-checklist-item" onClick={createChecklistItem}><BsPlus size={35} /></a>
+                            </ul>
+                            <button type="submit">Create</button>
+                        </>
+                    ) : (
+                        <div className="selection">
+                            <button type="button" onClick={() => handleTaskOrChecklistChange('checklist')}>Checklist</button>
+                            <button type="button" onClick={() => handleTaskOrChecklistChange('text')}>Text</button>
+                        </div>
+                    )
+                }
                 </form>
             </div>
         </div>
