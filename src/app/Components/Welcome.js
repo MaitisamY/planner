@@ -22,7 +22,7 @@ export default function Welcome({ tasks, addNewTask }) {
             </h2>
             <h3>PLANNER is a simple and easy to use daily tasks maintainer app.</h3>
             <button onClick={addNewTask} className="create-task">
-                {tasks.length === 0 ? 'Create your first task' : 'Create Task'}
+                Create Task
             </button>
             <h4>Kindly share our app on social media</h4>
             <div className="share-buttons">

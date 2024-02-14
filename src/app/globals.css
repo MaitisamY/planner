@@ -923,7 +923,8 @@ footer span {
   color: #f8f9fa;
   border: none;
   border-radius: 50px;
-  margin: 0 0 15px 0;
+  display: inline-block;
+  align-self: center;
 }
 
 .popup .add-checklist-item:hover {

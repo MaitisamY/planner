@@ -77,17 +77,42 @@ export const useToDoFunctions = () => {
       setViews(id);
     }
   
-    const addTask = (task, date, updatedDate, dueDate, status) => {
-      const newTask = { id: generateTaskId(), task, date, updatedDate, dueDate, status };
-      setTasks((prevTasks) => {
-        const updatedTasks = [newTask, ...prevTasks];
-        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-        return updatedTasks;
-      });
-      // Show success message
-      addNotification('Task added successfully!');
-      console.log(newTask);
+    // const addTask = (task, date, updatedDate, dueDate, status) => {
+    //   const newTask = { id: generateTaskId(), task, date, updatedDate, dueDate, status };
+    //   setTasks((prevTasks) => {
+    //     const updatedTasks = [newTask, ...prevTasks];
+    //     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    //     return updatedTasks;
+    //   });
+    //   // Show success message
+    //   addNotification('Task added successfully!');
+    //   console.log(newTask);
+    // };
+
+    const addTask = (taskData) => {
+      const { type, ...rest } = taskData;
+      if (type === 'text') {
+        const newTask = { id: generateTaskId(), type, ...rest };
+        setToDo(prevToDo => ({
+          ...prevToDo,
+          checklist: [...prevToDo.checklist, newTask]
+        }));
+        // Show success message
+        addNotification('Task added successfully!');
+      } else if (type === 'checklist') {
+        const newTask = { id: generateTaskId(), type, tasks: [] };
+        setToDo(prevToDo => ({
+          ...prevToDo,
+          checklist: [...prevToDo.checklist, newTask]
+        }));
+        // Show success message
+        addNotification('Checklists added successfully!');
+      } else {
+        // Handle invalid task type
+        console.error('Invalid task type:', type);
+      }
     };
+    
   
     const markTask = (id) => {
       const newTasks = tasks.map((task) =>
